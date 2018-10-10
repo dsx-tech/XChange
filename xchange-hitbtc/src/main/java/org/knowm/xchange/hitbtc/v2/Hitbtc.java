@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcCandle;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcCurrency;
+import org.knowm.xchange.hitbtc.v2.dto.HitbtcException;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcOrderBook;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcSymbol;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcTicker;
@@ -27,7 +28,8 @@ public interface Hitbtc {
 
   @GET
   @Path("public/currency/{currency}")
-  HitbtcCurrency getCurrency(@PathParam("currency") String currency) throws IOException;
+  HitbtcCurrency getCurrency(@PathParam("currency") String currency)
+      throws HitbtcException, IOException;
 
   @GET
   @Path("public/ticker")
@@ -35,12 +37,13 @@ public interface Hitbtc {
 
   @GET
   @Path("public/ticker/{symbol}")
-  HitbtcTicker getTicker(@PathParam("symbol") String symbol) throws IOException;
+  HitbtcTicker getTicker(@PathParam("symbol") String symbol) throws HitbtcException, IOException;
 
   @GET
   @Path("public/orderbook/{symbol}")
   HitbtcOrderBook getOrderBook(
-      @PathParam("symbol") String symbol, @QueryParam("limit") Integer limit) throws IOException;
+      @PathParam("symbol") String symbol, @QueryParam("limit") Integer limit)
+      throws HitbtcException, IOException;
 
   @GET
   @Path("public/trades/{symbol}")
@@ -48,7 +51,7 @@ public interface Hitbtc {
       @PathParam("symbol") String symbol,
       @QueryParam("limit") long limit,
       @QueryParam("offset") long offset)
-      throws IOException;
+      throws HitbtcException, IOException;
 
   @GET
   @Path("public/ticker")
@@ -60,5 +63,5 @@ public interface Hitbtc {
       @PathParam("symbol") String symbol,
       @QueryParam("limit") int limit,
       @QueryParam("period") String period)
-      throws IOException;
+      throws HitbtcException, IOException;
 }
