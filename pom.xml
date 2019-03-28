@@ -9,7 +9,7 @@
 
 	<groupId>org.knowm.xchange</groupId>
 	<artifactId>xchange-parent</artifactId>
-	<version>4.3.11-dsx-SNAPSHOT</version>
+	<version>4.3.12-dsx-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>XChange</name>
@@ -69,16 +69,13 @@
 
 	<distributionManagement>
 		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>aws-snapshot</id>
+			<url>s3://dsx-maven/snapshot/</url>
 		</snapshotRepository>
 		<repository>
-			<id>sonatype-nexus-staging</id>
-			<name>Nexus Release Repository</name>
-			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>aws-release</id>
+			<url>s3://dsx-maven/release</url>
 		</repository>
-		<downloadUrl>https://oss.sonatype.org/content/groups/public/org/knowm/xchange</downloadUrl>
 	</distributionManagement>
 
 	<scm>
@@ -510,6 +507,13 @@
 			</plugin>
 
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>com.gkatzioura.maven.cloud</groupId>
+				<artifactId>s3-storage-wagon</artifactId>
+				<version>1.0</version>
+			</extension>
+		</extensions>
 	</build>
 
 </project>
