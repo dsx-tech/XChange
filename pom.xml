@@ -70,12 +70,12 @@
 
 	<distributionManagement>
 		<snapshotRepository>
-			<id>aws-snapshot</id>
-			<url>s3://dsx-maven/snapshot/</url>
+			<id>nexus-snapshot</id>
+			<url>https://nexus.dsx.cool/repository/maven-snapshots/</url>
 		</snapshotRepository>
 		<repository>
-			<id>aws-release</id>
-			<url>s3://dsx-maven/release</url>
+			<id>nexus-release</id>
+			<url>https://nexus.dsx.cool/repository/maven-releases/</url>
 		</repository>
 	</distributionManagement>
 
