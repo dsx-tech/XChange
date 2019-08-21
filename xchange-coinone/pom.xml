@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.knowm.xchange</groupId>
         <artifactId>xchange-parent</artifactId>
-        <version>4.3.15-dsx-SNAPSHOT</version>
+        <version>4.3.15-dsx</version>
     </parent>
 
     <artifactId>xchange-coinone</artifactId>
