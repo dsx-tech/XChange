@@ -61,4 +61,31 @@ public class CurrencyPairTest {
     CurrencyPair jsonCopy = ObjectMapperHelper.viaJSON(CurrencyPair.XBT_USD);
     assertThat(jsonCopy).isEqualTo(CurrencyPair.XBT_USD);
   }
+
+  @Test
+  public void testFromSymbol() {
+    CurrencyPair pair = CurrencyPair.fromSymbol("steemusdt");
+    assertThat(CurrencyPair.STEEM_USDT).isEqualTo(pair);
+
+    pair = CurrencyPair.fromSymbol("steemeth");
+    assertThat(CurrencyPair.STEEM_ETH).isEqualTo(pair);
+
+    pair = CurrencyPair.fromSymbol("btcusdt");
+    assertThat(CurrencyPair.BTC_USDT).isEqualTo(pair);
+
+    pair = CurrencyPair.fromSymbol("btcusd");
+    assertThat(CurrencyPair.BTC_USD).isEqualTo(pair);
+
+    pair = CurrencyPair.fromSymbol(null);
+    assertThat(pair).isEqualTo(null);
+
+    pair = CurrencyPair.fromSymbol("bla");
+    assertThat(pair).isEqualTo(null);
+
+    pair = CurrencyPair.fromSymbol("blablabla");
+    assertThat(pair).isEqualTo(null);
+
+    pair = CurrencyPair.fromSymbol("usdusd");
+    assertThat(pair).isEqualTo(null);
+  }
 }
