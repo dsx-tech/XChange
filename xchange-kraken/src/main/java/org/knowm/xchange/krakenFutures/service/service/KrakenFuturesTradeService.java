@@ -6,7 +6,8 @@ import org.knowm.xchange.krakenFutures.KrakenFuturesAdapters;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrders;
 import org.knowm.xchange.service.trade.TradeService;
 
-public class KrakenFuturesTradeService extends KrakenFuturesTradeServiceRaw implements TradeService {
+public class KrakenFuturesTradeService extends KrakenFuturesTradeServiceRaw
+    implements TradeService {
 
   /**
    * Constructor
@@ -22,5 +23,4 @@ public class KrakenFuturesTradeService extends KrakenFuturesTradeServiceRaw impl
     KrakenFuturesOrders krakenOpenOrders = openOrders();
     return KrakenFuturesAdapters.adaptOrders(krakenOpenOrders);
   }
-
 }

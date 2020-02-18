@@ -4,62 +4,56 @@ import java.math.BigDecimal;
 
 public class KrakenFuturesAuxiliaryAccount {
 
-    private BigDecimal usd;
+  private BigDecimal usd;
 
-    /**
-     * The portfolio value of the account, in currency
-     */
-    private BigDecimal pv;
+  /** The portfolio value of the account, in currency */
+  private BigDecimal pv;
 
-    /**
-     * The PnL of current open positions of the account, in currency
-     */
-    private BigDecimal pnl;
+  /** The PnL of current open positions of the account, in currency */
+  private BigDecimal pnl;
 
-    /**
-     * The available funds of the account, in currency
-     */
-    private BigDecimal af;
+  /** The available funds of the account, in currency */
+  private BigDecimal af;
 
-    private BigDecimal funding;
+  private BigDecimal funding;
 
-    public BigDecimal getUsd() {
-        return usd;
-    }
+  public BigDecimal getUsd() {
+    return usd;
+  }
 
-    public void setUsd(BigDecimal usd) {
-        this.usd = usd;
-    }
+  public void setUsd(BigDecimal usd) {
+    this.usd = usd;
+  }
 
-    public BigDecimal getPv() {
-        return pv;
-    }
+  public BigDecimal getPv() {
+    return pv;
+  }
 
-    public void setPv(BigDecimal pv) {
-        this.pv = pv;
-    }
+  public void setPv(BigDecimal pv) {
+    this.pv = pv;
+  }
 
-    public BigDecimal getPnl() {
-        return pnl;
-    }
+  public BigDecimal getPnl() {
+    return pnl;
+  }
 
-    public void setPnl(BigDecimal pnl) {
-        this.pnl = pnl;
-    }
+  public void setPnl(BigDecimal pnl) {
+    this.pnl = pnl;
+  }
 
-    public BigDecimal getAf() {
-        return af;
-    }
+  public BigDecimal getAf() {
+    return af;
+  }
 
-    public void setAf(BigDecimal af) {
-        this.af = af;
-    }
+  public void setAf(BigDecimal af) {
+    this.af = af;
+  }
 
-    public BigDecimal getFunding() {
-        return funding;
-    }
+  public BigDecimal getFunding() {
+    return funding;
+  }
 
-    public void setFunding(BigDecimal funding) {
-        this.funding = funding;
-    }
+  public void setFunding(BigDecimal funding) {
+    this.funding = funding;
+  }
 }

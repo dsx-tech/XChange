@@ -8,11 +8,11 @@ import org.knowm.xchange.currency.Currency;
 public class CurrencyDeserializer extends KeyDeserializer {
 
   @Override
-  public Object deserializeKey(String currencyString, DeserializationContext deserializationContext) {
+  public Object deserializeKey(
+      String currencyString, DeserializationContext deserializationContext) {
     if (StringUtils.isBlank(currencyString)) {
       return null;
     }
     return Currency.getInstanceNoCreate(currencyString);
   }
-
 }

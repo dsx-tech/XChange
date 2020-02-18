@@ -2,18 +2,16 @@ package org.knowm.xchange.krakenFutures.dto.marketdata;
 
 import org.knowm.xchange.krakenFutures.dto.KrakenFuturesResult;
 
-/**
- * @author pchertalev
- */
+/** @author pchertalev */
 public class KrakenFuturesOrderBookResult extends KrakenFuturesResult {
 
-    private KrakenFuturesOrderBook orderBook;
+  private KrakenFuturesOrderBook orderBook;
 
-    public KrakenFuturesOrderBook getOrderBook() {
-        return orderBook;
-    }
+  public KrakenFuturesOrderBook getOrderBook() {
+    return orderBook;
+  }
 
-    public void setOrderBook(KrakenFuturesOrderBook orderBook) {
-        this.orderBook = orderBook;
-    }
+  public void setOrderBook(KrakenFuturesOrderBook orderBook) {
+    this.orderBook = orderBook;
+  }
 }

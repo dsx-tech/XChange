@@ -15,37 +15,37 @@ import si.mazi.rescu.SynchronizedValueFactory;
 
 public class KrakenFuturesBaseService extends BaseExchangeService implements BaseService {
 
-    protected final KrakenFuturesAuthenticated kraken;
-    protected final KrakenFuturesDigest signatureCreator;
-    protected final String apyKey;
-    protected final SynchronizedValueFactory<Long> nonceFactory;
+  protected final KrakenFuturesAuthenticated kraken;
+  protected final KrakenFuturesDigest signatureCreator;
+  protected final String apyKey;
+  protected final SynchronizedValueFactory<Long> nonceFactory;
 
-    public KrakenFuturesBaseService(Exchange exchange) {
-        super(exchange);
-        kraken =
-                RestProxyFactory.createProxy(
-                        KrakenFuturesAuthenticated.class,
-                        exchange.getExchangeSpecification().getSslUri(),
-                        getClientConfig());
+  public KrakenFuturesBaseService(Exchange exchange) {
+    super(exchange);
+    kraken =
+        RestProxyFactory.createProxy(
+            KrakenFuturesAuthenticated.class,
+            exchange.getExchangeSpecification().getSslUri(),
+            getClientConfig());
 
-        apyKey = exchange.getExchangeSpecification().getApiKey();
-        signatureCreator = new KrakenFuturesDigest(exchange.getExchangeSpecification().getSecretKey());
-        nonceFactory = exchange.getNonceFactory();
+    apyKey = exchange.getExchangeSpecification().getApiKey();
+    signatureCreator = new KrakenFuturesDigest(exchange.getExchangeSpecification().getSecretKey());
+    nonceFactory = exchange.getNonceFactory();
+  }
+
+  protected <T extends KrakenFuturesResult> T checkResult(T krakenResult) {
+    String error = krakenResult.getError();
+    if (StringUtils.isNotBlank(error)) {
+      if (StringUtils.containsIgnoreCase(error, "nonceBelowThreshold")
+          || StringUtils.containsIgnoreCase(error, "nonceDuplicate")) {
+        throw new NonceException(error);
+      } else if (StringUtils.containsIgnoreCase(error, "insufficientFunds")) {
+        throw new FundsExceededException(error);
+      } else if (StringUtils.containsIgnoreCase(error, "apiLimitExceeded")) {
+        throw new RateLimitExceededException(error);
+      }
+      throw new ExchangeException(error);
     }
-
-    protected <T extends KrakenFuturesResult> T checkResult(T krakenResult) {
-        String error = krakenResult.getError();
-        if (StringUtils.isNotBlank(error)) {
-            if (StringUtils.containsIgnoreCase(error, "nonceBelowThreshold") || StringUtils.containsIgnoreCase(error, "nonceDuplicate") ) {
-                throw new NonceException(error);
-            } else if (StringUtils.containsIgnoreCase(error, "insufficientFunds")) {
-                throw new FundsExceededException(error);
-            } else if (StringUtils.containsIgnoreCase(error, "apiLimitExceeded")) {
-                throw new RateLimitExceededException(error);
-            }
-            throw new ExchangeException(error);
-        }
-        return krakenResult;
-    }
-
+    return krakenResult;
+  }
 }

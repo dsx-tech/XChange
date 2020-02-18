@@ -480,10 +480,11 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
 
   private static final int MIN_CURRENCY_LEN = 2;
   public static CurrencyPair fromSymbol(String pair) {
-    if (pair == null || pair.length() < MIN_CURRENCY_LEN * 2)
-      return null;
+    if (pair == null || pair.length() < MIN_CURRENCY_LEN * 2) return null;
 
-    for (int firstCurrencyLen = MIN_CURRENCY_LEN; firstCurrencyLen <= pair.length() - MIN_CURRENCY_LEN; firstCurrencyLen++) {
+    for (int firstCurrencyLen = MIN_CURRENCY_LEN;
+        firstCurrencyLen <= pair.length() - MIN_CURRENCY_LEN;
+        firstCurrencyLen++) {
       Currency curr1 = Currency.getInstanceNoCreate(pair.substring(0, firstCurrencyLen));
       Currency curr2 = Currency.getInstanceNoCreate(pair.substring(firstCurrencyLen));
       if (curr1 != null && curr2 != null && curr1 != curr2) {
@@ -491,7 +492,7 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
       } else {
         curr1 = Currency.getInstanceNoCreate(pair.substring(0, firstCurrencyLen + 1));
         curr2 = Currency.getInstanceNoCreate(pair.substring(firstCurrencyLen + 1));
-        if (curr1 != null && curr2 != null &&  curr1 != curr2) {
+        if (curr1 != null && curr2 != null && curr1 != curr2) {
           return new CurrencyPair(curr1, curr2);
         }
       }

@@ -4,16 +4,14 @@ import org.knowm.xchange.krakenFutures.dto.KrakenFuturesResult;
 
 public class KrakenCancelAllOrders extends KrakenFuturesResult {
 
-    /**
-     * 	A structure containing information on the cancellation request, see below
-     */
-    private KrakenCancelAllOrdersStatus cancelStatus;
+  /** A structure containing information on the cancellation request, see below */
+  private KrakenCancelAllOrdersStatus cancelStatus;
 
-    public KrakenCancelAllOrdersStatus getCancelStatus() {
-        return cancelStatus;
-    }
+  public KrakenCancelAllOrdersStatus getCancelStatus() {
+    return cancelStatus;
+  }
 
-    public void setCancelStatus(KrakenCancelAllOrdersStatus cancelStatus) {
-        this.cancelStatus = cancelStatus;
-    }
+  public void setCancelStatus(KrakenCancelAllOrdersStatus cancelStatus) {
+    this.cancelStatus = cancelStatus;
+  }
 }

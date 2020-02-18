@@ -5,22 +5,22 @@ import java.util.List;
 
 public class KrakenFuturesOrderBook {
 
-    private List<BigDecimal[]> asks;
-    private List<BigDecimal[]> bids;
+  private List<BigDecimal[]> asks;
+  private List<BigDecimal[]> bids;
 
-    public List<BigDecimal[]> getAsks() {
-        return asks;
-    }
+  public List<BigDecimal[]> getAsks() {
+    return asks;
+  }
 
-    public void setAsks(List<BigDecimal[]> asks) {
-        this.asks = asks;
-    }
+  public void setAsks(List<BigDecimal[]> asks) {
+    this.asks = asks;
+  }
 
-    public List<BigDecimal[]> getBids() {
-        return bids;
-    }
+  public List<BigDecimal[]> getBids() {
+    return bids;
+  }
 
-    public void setBids(List<BigDecimal[]> bids) {
-        this.bids = bids;
-    }
+  public void setBids(List<BigDecimal[]> bids) {
+    this.bids = bids;
+  }
 }

@@ -12,7 +12,8 @@ import si.mazi.rescu.SynchronizedValueFactory;
 /** @author pchertalev */
 public class KrakenFuturesExchange extends BaseExchange implements Exchange {
 
-  private final SynchronizedValueFactory<Long> nonceFactory = new TimestampIncrementingNonceFactory();
+  private final SynchronizedValueFactory<Long> nonceFactory =
+      new TimestampIncrementingNonceFactory();
 
   @Override
   protected void initServices() {
@@ -39,5 +40,4 @@ public class KrakenFuturesExchange extends BaseExchange implements Exchange {
   public SynchronizedValueFactory<Long> getNonceFactory() {
     return nonceFactory;
   }
-
 }
