@@ -1,19 +1,21 @@
-package org.knowm.xchange.kraken;
+package org.knowm.xchange.krakenFutures;
 
 import org.junit.Ignore;
 import org.junit.Test;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.ExchangeSpecification;
+import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
-import org.knowm.xchange.krakenFutures.KrakenFuturesExchange;
+import org.knowm.xchange.krakenFutures.dto.KrakenFuturesResult;
 import org.knowm.xchange.krakenFutures.dto.account.KrakenFuturesAccounts;
+import org.knowm.xchange.krakenFutures.dto.account.KrakenFuturesTransfers;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesOrderType;
-import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesSide;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesInstruments;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenCancelAllOrders;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesFills;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOpenPositions;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrderSendStatusResult;
@@ -30,6 +32,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct.FI;
+import static org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct.PI;
 
 @Ignore
 public class FuturesMarketDataTest {
@@ -37,12 +40,10 @@ public class FuturesMarketDataTest {
      * account:
      * go858ujj@futures-demo.com
      * ac9gypodsbqmse3413x1hs
-     *
+     * <p>
      * Demo Api Key
      * SEpLe3MiVCPWQqVIXObDzhCKQIh3IQcfiM/OeUr+9JS5hykZQw1jl6UF
      * cosfOtLxeSHGrAFIo1zD3lCI1Qj4lfia0ezIlHzbT+nd2vNKP4JE2l6t00P/SN+nWnAwEtAbvDS+siPgHTZhXwfy
-     *
-     * @throws Exception
      */
     @Test
     public void tickerFetchTest() throws Exception {
@@ -58,7 +59,7 @@ public class FuturesMarketDataTest {
         MarketDataService marketDataService = exchange.getMarketDataService();
         KrakenFuturesMarketDataServiceRaw marketDataServiceRaw = (KrakenFuturesMarketDataServiceRaw) marketDataService;
 
-        Ticker ticker = marketDataService.getTicker(CurrencyPair.BCH_USD, FI, LocalDate.of(20,3,27));
+        Ticker ticker = marketDataService.getTicker(CurrencyPair.BCH_USD, FI, LocalDate.of(20, 3, 27));
         System.out.println(ticker.toString());
         assertThat(ticker).isNotNull();
 
@@ -71,11 +72,11 @@ public class FuturesMarketDataTest {
         KrakenFuturesInstruments instuments = marketDataServiceRaw.getKrakenInstruments();
         assertThat(instuments).isNotNull();
 
-        KrakenFuturesOrders openOrders = tradeService.getKrakenOpenOrders();
+        KrakenFuturesOrders openOrders = tradeService.openOrders();
         assertThat(openOrders).isNotNull();
 
         KrakenFuturesOrderSendStatusResult sendStatus = tradeService.sendOrder(
-                KrakenFuturesOrderType.lmt, CurrencyPair.LTC_USD, KrakenFuturesProduct.PI, null,
+                KrakenFuturesOrderType.lmt, CurrencyPair.LTC_USD, PI, null,
                 KrakenFuturesSide.sell, 5L, new BigDecimal("71.01"));
 
         assertThat(sendStatus).isNotNull();
@@ -88,5 +89,20 @@ public class FuturesMarketDataTest {
 
         KrakenFuturesOpenPositions openPositions = tradeService.openPositions();
         assertThat(openPositions).isNotNull();
+
+        KrakenCancelAllOrders cancelOrdersResult = tradeService.cancelAllOrders();
+        assertThat(cancelOrdersResult).isNotNull();
+
+        cancelOrdersResult = tradeService.cancelAllOrders(PI, CurrencyPair.XBT_USD, null);
+        assertThat(cancelOrdersResult).isNotNull();
+
+        KrakenFuturesResult withdrawalResult = accountService.withdrawalToSpotWallet(Currency.XBT, new BigDecimal("0.0001"));
+        assertThat(withdrawalResult).isNotNull();
+
+        KrakenFuturesResult transfer = accountService.transfer("cash", "fi_xrpusd", Currency.XRP, new BigDecimal("0.01"));
+        assertThat(transfer).isNotNull();
+
+        KrakenFuturesTransfers transfers = accountService.transfers();
+        assertThat(transfers).isNotNull();
     }
 }

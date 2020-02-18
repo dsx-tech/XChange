@@ -1,13 +1,17 @@
 package org.knowm.xchange.krakenFutures;
 
+import org.knowm.xchange.currency.Currency;
+import org.knowm.xchange.krakenFutures.dto.KrakenFuturesResult;
 import org.knowm.xchange.krakenFutures.dto.account.KrakenFuturesAccounts;
-import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrderSendStatusResult;
-import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrders;
+import org.knowm.xchange.krakenFutures.dto.account.KrakenFuturesTransfers;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesOrderType;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesSide;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesTrigerSignal;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenCancelAllOrders;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesFills;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOpenPositions;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrderSendStatusResult;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrders;
 import org.knowm.xchange.krakenFutures.service.KrakenFuturesDigest;
 
 import javax.ws.rs.GET;
@@ -50,4 +54,24 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
     @GET
     @Path("openpositions")
     KrakenFuturesOpenPositions openPositions(@HeaderParam("Nonce") String nonce, @HeaderParam("APIKey") String apyKey, @HeaderParam("Authent") KrakenFuturesDigest authent);
+
+    @GET
+    @Path("cancelallorders")
+    KrakenCancelAllOrders cancelAllOrders(@HeaderParam("Nonce") String nonce, @HeaderParam("APIKey") String apyKey,
+                                          @HeaderParam("Authent") KrakenFuturesDigest authent, @QueryParam("symbol") String symbol);
+
+    @GET
+    @Path("withdrawal")
+    KrakenFuturesResult withdrawal(@HeaderParam("Nonce") String nonce, @HeaderParam("APIKey") String apyKey, @HeaderParam("Authent") KrakenFuturesDigest authent,
+                                   @QueryParam("currency") Currency currency, @QueryParam("amount") BigDecimal amount);
+
+    @GET
+    @Path("transfer")
+    KrakenFuturesResult transfer(@HeaderParam("Nonce") String nonce, @HeaderParam("APIKey") String apyKey, @HeaderParam("Authent") KrakenFuturesDigest authent,
+                    @QueryParam("fromAccount") String fromAccount, @QueryParam("toAccount") String toAccount, @QueryParam("unit") Currency currency, @QueryParam("amount") BigDecimal amount);
+
+    @GET
+    @Path("transfers")
+    KrakenFuturesTransfers transfers(@HeaderParam("Nonce") String nonce, @HeaderParam("APIKey") String apyKey, @HeaderParam("Authent") KrakenFuturesDigest authent,
+                                     @QueryParam("lastTransferTime") Date lastTransferTime);
 }

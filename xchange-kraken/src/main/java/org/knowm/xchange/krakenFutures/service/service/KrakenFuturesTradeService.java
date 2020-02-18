@@ -19,7 +19,7 @@ public class KrakenFuturesTradeService extends KrakenFuturesTradeServiceRaw impl
 
   @Override
   public OpenOrders getOpenOrders() {
-    KrakenFuturesOrders krakenOpenOrders = getKrakenOpenOrders();
+    KrakenFuturesOrders krakenOpenOrders = openOrders();
     return KrakenFuturesAdapters.adaptOrders(krakenOpenOrders);
   }
 

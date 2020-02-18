@@ -3,6 +3,7 @@ package org.knowm.xchange.krakenFutures.service;
 import org.apache.commons.lang3.StringUtils;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.exceptions.ExchangeException;
+import org.knowm.xchange.exceptions.FundsExceededException;
 import org.knowm.xchange.exceptions.NonceException;
 import org.knowm.xchange.exceptions.RateLimitExceededException;
 import org.knowm.xchange.krakenFutures.KrakenFuturesAuthenticated;
@@ -37,6 +38,8 @@ public class KrakenFuturesBaseService extends BaseExchangeService implements Bas
         if (StringUtils.isNotBlank(error)) {
             if (StringUtils.containsIgnoreCase(error, "nonceBelowThreshold") || StringUtils.containsIgnoreCase(error, "nonceDuplicate") ) {
                 throw new NonceException(error);
+            } else if (StringUtils.containsIgnoreCase(error, "insufficientFunds")) {
+                throw new FundsExceededException(error);
             } else if (StringUtils.containsIgnoreCase(error, "apiLimitExceeded")) {
                 throw new RateLimitExceededException(error);
             }
