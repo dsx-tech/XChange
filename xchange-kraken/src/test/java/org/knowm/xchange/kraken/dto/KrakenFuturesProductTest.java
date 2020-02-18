@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.exceptions.ExchangeException;
-import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesProduct;
+import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct;
 
 import java.time.LocalDate;
 

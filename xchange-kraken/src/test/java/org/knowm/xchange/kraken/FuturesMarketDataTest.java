@@ -8,20 +8,19 @@ import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
-import org.knowm.xchange.kraken.futures.KrakenFuturesExchange;
-import org.knowm.xchange.kraken.futures.dto.account.KrakenFuturesAccount;
-import org.knowm.xchange.kraken.futures.dto.account.KrakenFuturesAccounts;
-import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesOrderType;
-import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesProduct;
-import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesSide;
-import org.knowm.xchange.kraken.futures.dto.marketdata.KrakenFuturesInstruments;
-import org.knowm.xchange.kraken.futures.dto.trade.KrakenFuturesFills;
-import org.knowm.xchange.kraken.futures.dto.trade.KrakenFuturesOpenPositions;
-import org.knowm.xchange.kraken.futures.dto.trade.KrakenFuturesOrderSendStatusResult;
-import org.knowm.xchange.kraken.futures.dto.trade.KrakenFuturesOrders;
-import org.knowm.xchange.kraken.futures.service.service.KrakenFuturesAccountServiceRaw;
-import org.knowm.xchange.kraken.futures.service.service.KrakenFuturesMarketDataServiceRaw;
-import org.knowm.xchange.kraken.futures.service.service.KrakenFuturesTradeServiceRaw;
+import org.knowm.xchange.krakenFutures.KrakenFuturesExchange;
+import org.knowm.xchange.krakenFutures.dto.account.KrakenFuturesAccounts;
+import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesOrderType;
+import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct;
+import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesSide;
+import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesInstruments;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesFills;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOpenPositions;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrderSendStatusResult;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrders;
+import org.knowm.xchange.krakenFutures.service.service.KrakenFuturesAccountServiceRaw;
+import org.knowm.xchange.krakenFutures.service.service.KrakenFuturesMarketDataServiceRaw;
+import org.knowm.xchange.krakenFutures.service.service.KrakenFuturesTradeServiceRaw;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 
 import java.math.BigDecimal;
@@ -30,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesProduct.FI;
+import static org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct.FI;
 
 @Ignore
 public class FuturesMarketDataTest {
