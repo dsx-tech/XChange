@@ -7,11 +7,11 @@ import org.knowm.xchange.kraken.futures.dto.marketdata.KrakenFuturesInstruments;
 import org.knowm.xchange.kraken.futures.dto.marketdata.KrakenFuturesOrderBookResult;
 import org.knowm.xchange.kraken.futures.dto.marketdata.KrakenFuturesTicker;
 import org.knowm.xchange.kraken.futures.dto.marketdata.KrakenFuturesTickers;
-import org.knowm.xchange.kraken.futures.service.KrakenFutureBaseService;
+import org.knowm.xchange.kraken.futures.service.KrakenFuturesBaseService;
 
 import java.time.LocalDate;
 
-public class KrakenFuturesMarketDataServiceRaw extends KrakenFutureBaseService {
+public class KrakenFuturesMarketDataServiceRaw extends KrakenFuturesBaseService {
 
     /**
      * Constructor

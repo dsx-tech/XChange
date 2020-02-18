@@ -6,10 +6,15 @@ import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.trade.LimitOrder;
+import org.knowm.xchange.dto.trade.OpenOrders;
+import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesOrderType;
 import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesProduct;
+import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesSide;
 import org.knowm.xchange.kraken.futures.dto.marketdata.KrakenFuturesOrderBookResult;
 import org.knowm.xchange.kraken.futures.dto.marketdata.KrakenFuturesTicker;
 import org.knowm.xchange.kraken.futures.dto.marketdata.KrakenFuturesTickers;
+import org.knowm.xchange.kraken.futures.dto.trade.KrakenFuturesOrder;
+import org.knowm.xchange.kraken.futures.dto.trade.KrakenFuturesOrders;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -52,5 +57,32 @@ public class KrakenFuturesAdapters {
         Stream<LimitOrder> bidStream = krakenOrderbook.getOrderBook().getBids().stream()
                 .map(ask -> new LimitOrder(Order.OrderType.BID, ask[1], currencyPair, null, null, ask[0]));
         return new OrderBook(krakenOrderbook.getServerTime(), askStream, bidStream);
+    }
+
+    public static OpenOrders adaptOrders(KrakenFuturesOrders krakenOpenOrders) {
+        return new OpenOrders(krakenOpenOrders.getOpenOrders().stream()
+                .map(KrakenFuturesAdapters::adaptOrder)
+                .collect(Collectors.toList())
+        );
+    }
+
+    private static LimitOrder adaptOrder(KrakenFuturesOrder krakenOrder) {
+        LimitOrder.Builder builder = new LimitOrder.Builder(
+                krakenOrder.getSide() == KrakenFuturesSide.sell ? Order.OrderType.ASK : Order.OrderType.BID,
+                CurrencyPair.fromSymbol(krakenOrder.getSymbol())
+
+        );
+        if (krakenOrder.getOrderType() == KrakenFuturesOrderType.stp) {
+            builder.limitPrice(krakenOrder.getStopPrice());
+        } else {
+            builder.limitPrice(krakenOrder.getStopPrice());
+        }
+        return builder
+                .id(krakenOrder.getOrderId())
+                .limitPrice(krakenOrder.getOrderType().priceRetriever.apply(krakenOrder))
+                .originalAmount(toBD(krakenOrder.getUnfilledSize()).add(new BigDecimal(krakenOrder.getFilledSize())))
+                .remainingAmount(toBD(krakenOrder.getUnfilledSize()))
+                .cumulativeAmount(toBD(krakenOrder.getFilledSize()))
+                .build();
     }
 }

@@ -3,7 +3,6 @@ package org.knowm.xchange.kraken.futures.dto.marketdata;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesInstrumentType;
 import org.knowm.xchange.kraken.futures.utils.KrakenFuturesInstrumentTypeDeserializer;
-import org.knowm.xchange.utils.jackson.ISO8601DateDeserializer;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -36,7 +35,6 @@ public class KrakenFuturesInstrument {
      * For Futures: The date and time at which the Futures stops trading
      * For indices: Not returned because N/A
      */
-    @JsonDeserialize(using = ISO8601DateDeserializer.class)
     private Date lastTradingTime;
 
     /**

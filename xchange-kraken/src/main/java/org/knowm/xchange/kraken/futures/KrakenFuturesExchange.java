@@ -3,20 +3,22 @@ package org.knowm.xchange.kraken.futures;
 import org.knowm.xchange.BaseExchange;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeSpecification;
+import org.knowm.xchange.kraken.futures.service.service.KrakenFuturesAccountService;
 import org.knowm.xchange.kraken.futures.service.service.KrakenFuturesMarketDataService;
-import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
+import org.knowm.xchange.kraken.futures.service.service.KrakenFuturesTradeService;
+import org.knowm.xchange.utils.nonce.TimestampIncrementingNonceFactory;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 /** @author pchertalev */
 public class KrakenFuturesExchange extends BaseExchange implements Exchange {
 
-  private final SynchronizedValueFactory<Long> nonceFactory = new CurrentTimeNonceFactory();
+  private final SynchronizedValueFactory<Long> nonceFactory = new TimestampIncrementingNonceFactory();
 
   @Override
   protected void initServices() {
     this.marketDataService = new KrakenFuturesMarketDataService(this);
-    this.tradeService = null;
-    this.accountService = null;
+    this.tradeService = new KrakenFuturesTradeService(this);
+    this.accountService = new KrakenFuturesAccountService(this);
   }
 
   @Override
@@ -35,7 +37,6 @@ public class KrakenFuturesExchange extends BaseExchange implements Exchange {
 
   @Override
   public SynchronizedValueFactory<Long> getNonceFactory() {
-
     return nonceFactory;
   }
 

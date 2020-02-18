@@ -1,7 +1,6 @@
 package org.knowm.xchange.kraken.futures.dto.marketdata;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.knowm.xchange.utils.jackson.ISO8601DateDeserializer;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -33,7 +32,6 @@ public class KrakenFuturesTicker {
     /**
      * The date and time at which last was observed
      */
-    @JsonDeserialize(using = ISO8601DateDeserializer.class)
     private Date lastTime;
 
     /**

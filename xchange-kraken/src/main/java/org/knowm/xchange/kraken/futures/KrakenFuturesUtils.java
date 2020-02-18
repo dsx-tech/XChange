@@ -6,14 +6,7 @@ import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesProduct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.crypto.Mac;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import java.security.MessageDigest;
 import java.time.LocalDate;
-import java.util.Base64;
-
-import static org.knowm.xchange.service.BaseParamsDigest.HMAC_SHA_512;
 
 /**
  * @author pchertalev
@@ -60,24 +53,4 @@ public class KrakenFuturesUtils {
         return null;
     }
 
-    public static String getAuthent(String postData, String nonce, String endpointPath, String secretKeyBase64)
-    {
-        Mac mac512;
-        MessageDigest sha256;
-        try {
-            SecretKey secretKey = new SecretKeySpec
-                    (Base64.getDecoder().decode(secretKeyBase64.getBytes()), HMAC_SHA_512);
-            mac512 = Mac.getInstance(HMAC_SHA_512);
-            mac512.init(secretKey);
-            sha256 = MessageDigest.getInstance("SHA-256");
-        } catch (Exception e) {
-            throw new ExchangeException("Can't encoded signature: " + e.getMessage(), e);
-        }
-
-        sha256.update(postData.getBytes());
-        sha256.update(nonce.getBytes());
-        sha256.update(endpointPath.getBytes());
-        mac512.update(sha256.digest());
-        return Base64.getEncoder().encodeToString(mac512.doFinal()).trim();
-    }
 }

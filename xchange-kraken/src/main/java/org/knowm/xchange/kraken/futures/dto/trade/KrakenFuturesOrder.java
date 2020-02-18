@@ -3,8 +3,8 @@ package org.knowm.xchange.kraken.futures.dto.trade;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesOrderStatus;
+import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesOrderType;
 import org.knowm.xchange.kraken.futures.dto.enums.KrakenFuturesSide;
-import org.knowm.xchange.utils.jackson.ISO8601DateDeserializer;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,13 +14,11 @@ public class KrakenFuturesOrder {
     /**
      * The date and time the order was received
      */
-    @JsonDeserialize(using = ISO8601DateDeserializer.class)
     private Date receivedTime;
 
     /**
      * The date and time the order was last updated
      */
-    @JsonDeserialize(using = ISO8601DateDeserializer.class)
     private Date lastUpdateTime;
 
     /**
@@ -44,7 +42,7 @@ public class KrakenFuturesOrder {
     /**
      * The order type, either lmt for a limit order or stp for a stop order
      */
-    private String orderType;
+    private KrakenFuturesOrderType orderType;
 
     /**
      * 	The symbol of the futures the order refers to.
@@ -76,6 +74,11 @@ public class KrakenFuturesOrder {
      * If orderType is lmt: Not returned because N/A
      */
     private BigDecimal stopPrice;
+
+    /**
+     * The date and time the order was placed
+     */
+    private Date timestamp;
 
     public Date getReceivedTime() {
         return receivedTime;
@@ -117,11 +120,11 @@ public class KrakenFuturesOrder {
         this.cliOrdId = cliOrdId;
     }
 
-    public String getOrderType() {
+    public KrakenFuturesOrderType getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(String orderType) {
+    public void setOrderType(KrakenFuturesOrderType orderType) {
         this.orderType = orderType;
     }
 

@@ -1,8 +1,5 @@
 package org.knowm.xchange.kraken.futures.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.knowm.xchange.utils.jackson.ISO8601DateDeserializer;
-
 import java.util.Date;
 
 public class KrakenFuturesResult {
@@ -15,8 +12,9 @@ public class KrakenFuturesResult {
     /**
      * The server date and time
      */
-    @JsonDeserialize(using = ISO8601DateDeserializer.class)
     private Date serverTime;
+
+    private String error;
 
 
     public String getResult() {
@@ -33,5 +31,9 @@ public class KrakenFuturesResult {
 
     public void setServerTime(Date serverTime) {
         this.serverTime = serverTime;
+    }
+
+    public String getError() {
+        return error;
     }
 }
