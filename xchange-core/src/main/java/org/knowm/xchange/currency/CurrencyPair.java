@@ -479,6 +479,7 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
   }
 
   private static final int MIN_CURRENCY_LEN = 2;
+
   public static CurrencyPair fromSymbol(String pair) {
     if (pair == null || pair.length() < MIN_CURRENCY_LEN * 2) return null;
 
