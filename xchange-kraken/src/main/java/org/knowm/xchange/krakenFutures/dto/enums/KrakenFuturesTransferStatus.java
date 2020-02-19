@@ -1,5 +1,6 @@
 package org.knowm.xchange.krakenFutures.dto.enums;
 
+/** @author pchertalev */
 public enum KrakenFuturesTransferStatus {
 
   /** the withdrawal request was accepted and will be processed soon */

@@ -13,6 +13,7 @@ import org.knowm.xchange.service.BaseService;
 import si.mazi.rescu.RestProxyFactory;
 import si.mazi.rescu.SynchronizedValueFactory;
 
+/** @author pchertalev */
 public class KrakenFuturesBaseService extends BaseExchangeService implements BaseService {
 
   protected final KrakenFuturesAuthenticated kraken;

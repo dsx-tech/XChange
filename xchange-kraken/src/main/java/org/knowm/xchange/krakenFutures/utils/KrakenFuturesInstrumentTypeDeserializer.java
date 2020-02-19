@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import java.io.IOException;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesInstrumentType;
 
+/** @author pchertalev */
 public class KrakenFuturesInstrumentTypeDeserializer
     extends JsonDeserializer<KrakenFuturesInstrumentType> {
 

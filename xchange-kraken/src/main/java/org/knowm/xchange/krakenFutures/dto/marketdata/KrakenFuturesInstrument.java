@@ -6,6 +6,7 @@ import java.util.Date;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesInstrumentType;
 import org.knowm.xchange.krakenFutures.utils.KrakenFuturesInstrumentTypeDeserializer;
 
+/** @author pchertalev */
 public class KrakenFuturesInstrument {
 
   /** The symbol of the Futures or index, see Section 3.4.4 */

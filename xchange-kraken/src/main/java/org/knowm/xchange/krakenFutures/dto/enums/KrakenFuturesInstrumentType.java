@@ -2,6 +2,7 @@ package org.knowm.xchange.krakenFutures.dto.enums;
 
 import java.util.Arrays;
 
+/** @author pchertalev */
 public enum KrakenFuturesInstrumentType {
   futures_inverse,
   futures_vanilla,

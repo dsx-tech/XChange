@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import java.io.IOException;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesPositionSide;
 
+/** @author pchertalev */
 public class KrakenFuturesPositionSideDeserializer
     extends JsonDeserializer<KrakenFuturesPositionSide> {
 

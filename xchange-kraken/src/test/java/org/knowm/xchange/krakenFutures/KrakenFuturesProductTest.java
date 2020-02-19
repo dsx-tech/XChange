@@ -1,4 +1,4 @@
-package org.knowm.xchange.kraken.dto;
+package org.knowm.xchange.krakenFutures;
 
 import java.time.LocalDate;
 import org.apache.commons.lang3.tuple.ImmutableTriple;

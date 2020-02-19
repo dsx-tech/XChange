@@ -3,6 +3,7 @@ package org.knowm.xchange.krakenFutures.dto.marketdata;
 import java.util.List;
 import org.knowm.xchange.krakenFutures.dto.KrakenFuturesResult;
 
+/** @author pchertalev */
 public class KrakenFuturesInstruments extends KrakenFuturesResult {
   private List<KrakenFuturesInstrument> instruments;
 

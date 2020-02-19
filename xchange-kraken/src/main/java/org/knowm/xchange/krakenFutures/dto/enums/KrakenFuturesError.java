@@ -7,6 +7,7 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.ExchangeSecurityException;
 import org.knowm.xchange.exceptions.FrequencyLimitExceededException;
 
+/** @author pchertalev */
 public enum KrakenFuturesError {
   apiLimitExceeded(FrequencyLimitExceededException::new),
   authenticationError(ExchangeSecurityException::new),

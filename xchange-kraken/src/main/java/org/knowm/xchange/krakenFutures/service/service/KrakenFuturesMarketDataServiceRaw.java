@@ -1,22 +1,22 @@
 package org.knowm.xchange.krakenFutures.service.service;
 
 import java.time.LocalDate;
+import java.util.Date;
+import org.apache.commons.lang3.StringUtils;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesInstruments;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesOrderBookResult;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTicker;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTickers;
+import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTrades;
 import org.knowm.xchange.krakenFutures.service.KrakenFuturesBaseService;
 
+/** @author pchertalev */
 public class KrakenFuturesMarketDataServiceRaw extends KrakenFuturesBaseService {
 
-  /**
-   * Constructor
-   *
-   * @param exchange
-   */
   public KrakenFuturesMarketDataServiceRaw(Exchange exchange) {
 
     super(exchange);
@@ -44,5 +44,28 @@ public class KrakenFuturesMarketDataServiceRaw extends KrakenFuturesBaseService 
 
   public KrakenFuturesInstruments getKrakenInstruments() {
     return kraken.getInstruments();
+  }
+
+  public KrakenFuturesTrades getHistory(
+      KrakenFuturesProduct product, CurrencyPair currencyPair, LocalDate maturityDate) {
+    return getHistory(product, currencyPair, maturityDate, null);
+  }
+
+  public KrakenFuturesTrades getHistory(
+      KrakenFuturesProduct product,
+      CurrencyPair currencyPair,
+      LocalDate maturityDate,
+      Date lastTime) {
+    if (product == null || currencyPair == null) {
+      throw new ExchangeException("product and currency pair are mandatory");
+    }
+    return getHistory(product.formatProductId(currencyPair, maturityDate), lastTime);
+  }
+
+  public KrakenFuturesTrades getHistory(String symbol, Date lastTime) {
+    if (StringUtils.isBlank(symbol)) {
+      throw new ExchangeException("symbol is mandatory");
+    }
+    return kraken.history(symbol, lastTime);
   }
 }

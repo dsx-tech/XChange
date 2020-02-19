@@ -16,13 +16,9 @@ import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrderSendStatusRes
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrders;
 import org.knowm.xchange.krakenFutures.service.KrakenFuturesBaseService;
 
+/** @author pchertalev */
 public class KrakenFuturesTradeServiceRaw extends KrakenFuturesBaseService {
 
-  /**
-   * Constructor
-   *
-   * @param exchange
-   */
   public KrakenFuturesTradeServiceRaw(Exchange exchange) {
     super(exchange);
   }

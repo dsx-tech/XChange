@@ -13,6 +13,7 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.RestInvocation;
 
+/** @author pchertalev */
 public class KrakenFuturesDigest implements ParamsDigest {
 
   private String apiPrivateKey;

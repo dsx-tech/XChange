@@ -10,17 +10,18 @@ import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
+import org.knowm.xchange.dto.marketdata.Trade;
+import org.knowm.xchange.dto.marketdata.Trades;
 import org.knowm.xchange.dto.trade.LimitOrder;
-import org.knowm.xchange.dto.trade.OpenOrders;
-import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesOrderType;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesSide;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesOrderBookResult;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTicker;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTickers;
-import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrder;
-import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrders;
+import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTrade;
+import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTrades;
 
+/** @author pchertalev */
 public class KrakenFuturesAdapters {
 
   public static Ticker adaptTicker(KrakenFuturesTicker krakenTicker) {
@@ -65,33 +66,20 @@ public class KrakenFuturesAdapters {
     return new OrderBook(krakenOrderbook.getServerTime(), askStream, bidStream);
   }
 
-  public static OpenOrders adaptOrders(KrakenFuturesOrders krakenOpenOrders) {
-    return new OpenOrders(
-        krakenOpenOrders.getOpenOrders().stream()
-            .map(KrakenFuturesAdapters::adaptOrder)
+  public static Trades adaptTrades(KrakenFuturesTrades history, CurrencyPair currencyPair) {
+    return new Trades(
+        history.getHistory().stream()
+            .map(trade -> adaptTrade(trade, currencyPair))
             .collect(Collectors.toList()));
   }
 
-  private static LimitOrder adaptOrder(KrakenFuturesOrder krakenOrder) {
-    LimitOrder.Builder builder =
-        new LimitOrder.Builder(
-            krakenOrder.getSide() == KrakenFuturesSide.sell
-                ? Order.OrderType.ASK
-                : Order.OrderType.BID,
-            CurrencyPair.fromSymbol(krakenOrder.getSymbol()));
-
-    if (krakenOrder.getOrderType() == KrakenFuturesOrderType.stp) {
-      builder.limitPrice(krakenOrder.getStopPrice());
-    } else {
-      builder.limitPrice(krakenOrder.getStopPrice());
-    }
-    return builder
-        .id(krakenOrder.getOrderId())
-        .limitPrice(krakenOrder.getOrderType().priceRetriever.apply(krakenOrder))
-        .originalAmount(
-            toBD(krakenOrder.getUnfilledSize()).add(new BigDecimal(krakenOrder.getFilledSize())))
-        .remainingAmount(toBD(krakenOrder.getUnfilledSize()))
-        .cumulativeAmount(toBD(krakenOrder.getFilledSize()))
-        .build();
+  private static Trade adaptTrade(KrakenFuturesTrade trade, CurrencyPair currencyPair) {
+    return new Trade(
+        trade.getSide() == KrakenFuturesSide.sell ? Order.OrderType.ASK : Order.OrderType.BID,
+        toBD(trade.getSize()),
+        currencyPair,
+        trade.getPrice(),
+        trade.getTime(),
+        trade.getTradeId() == null ? null : trade.getTradeId().toString());
   }
 }

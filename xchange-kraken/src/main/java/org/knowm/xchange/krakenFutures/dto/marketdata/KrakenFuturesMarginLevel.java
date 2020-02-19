@@ -2,6 +2,7 @@ package org.knowm.xchange.krakenFutures.dto.marketdata;
 
 import java.math.BigDecimal;
 
+/** @author pchertalev */
 public class KrakenFuturesMarginLevel {
 
   /**

@@ -3,6 +3,7 @@ package org.knowm.xchange.krakenFutures.service.service;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.service.account.AccountService;
 
+/** @author pchertalev */
 public class KrakenFuturesAccountService extends KrakenFuturesAccountServiceRaw
     implements AccountService {
 

@@ -1,5 +1,6 @@
 package org.knowm.xchange.krakenFutures.dto.enums;
 
+/** @author pchertalev */
 public enum KrakenFuturesOrderEventStatus {
   // success statuses
   placed,

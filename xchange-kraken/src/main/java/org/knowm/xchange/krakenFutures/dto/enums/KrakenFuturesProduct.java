@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.exceptions.ExchangeException;
 
+/** @author pchertalev */
 public enum KrakenFuturesProduct {
   FI("Inverse Futures", true),
   FV("Vanilla Futures", true),

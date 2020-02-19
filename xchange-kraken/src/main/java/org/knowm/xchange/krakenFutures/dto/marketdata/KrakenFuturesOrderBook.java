@@ -3,6 +3,7 @@ package org.knowm.xchange.krakenFutures.dto.marketdata;
 import java.math.BigDecimal;
 import java.util.List;
 
+/** @author pchertalev */
 public class KrakenFuturesOrderBook {
 
   private List<BigDecimal[]> asks;
