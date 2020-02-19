@@ -37,10 +37,6 @@ public enum KrakenFuturesProduct {
         .orElse(null);
   }
 
-  /**
-   * @param maturityDate 16:00 UTC
-   * @return formatted productId string
-   */
   public String formatProductId(CurrencyPair pair, LocalDate maturityDate) {
     if (maturityDate != null && mustHaveMaturityDate) {
       return formatProductId(pair)

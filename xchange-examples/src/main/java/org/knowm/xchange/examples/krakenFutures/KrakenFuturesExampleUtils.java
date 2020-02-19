@@ -12,10 +12,12 @@ public class KrakenFuturesExampleUtils {
 
     Exchange krakenFuturesExchange =
         ExchangeFactory.INSTANCE.createExchange(KrakenFuturesExchange.class.getName());
-        krakenFuturesExchange.getExchangeSpecification().setApiKey("API Key");
-        krakenFuturesExchange.getExchangeSpecification().setSecretKey("Secret==");
-        krakenFuturesExchange.getExchangeSpecification().setUserName("user");
-        krakenFuturesExchange.getExchangeSpecification().setSslUri("https://demo-futures.kraken.com/derivatives");
+    krakenFuturesExchange.getExchangeSpecification().setApiKey("API Key");
+    krakenFuturesExchange.getExchangeSpecification().setSecretKey("Secret==");
+    krakenFuturesExchange.getExchangeSpecification().setUserName("user");
+    krakenFuturesExchange
+        .getExchangeSpecification()
+        .setSslUri("https://demo-futures.kraken.com/derivatives");
 
     krakenFuturesExchange.applySpecification(krakenFuturesExchange.getExchangeSpecification());
     return krakenFuturesExchange;
