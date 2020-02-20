@@ -32,8 +32,7 @@ public class KrakenFuturesAccount {
   private KrakenFuturesAccountMarginRequirements triggerEstimates;
 
   /** A structure containing account balances */
-  @JsonDeserialize(keyUsing = CurrencyDeserializer.class)
-  private Map<Currency, BigDecimal> balances;
+  private Map<String, BigDecimal> balances;
 
   public KrakenFuturesAccountType getType() {
     return type;
@@ -75,11 +74,11 @@ public class KrakenFuturesAccount {
     this.triggerEstimates = triggerEstimates;
   }
 
-  public Map<Currency, BigDecimal> getBalances() {
+  public Map<String, BigDecimal> getBalances() {
     return balances;
   }
 
-  public void setBalances(Map<Currency, BigDecimal> balances) {
+  public void setBalances(Map<String, BigDecimal> balances) {
     this.balances = balances;
   }
 }
