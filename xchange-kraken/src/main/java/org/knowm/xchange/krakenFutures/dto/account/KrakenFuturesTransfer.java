@@ -1,12 +1,19 @@
 package org.knowm.xchange.krakenFutures.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.math.BigDecimal;
-import java.util.Date;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesTransferStatus;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesTransferType;
+import org.knowm.xchange.utils.jackson.CurrencyDeserializer;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 public class KrakenFuturesTransfer {
+
+  @JsonDeserialize(keyUsing = CurrencyDeserializer.class)
+  private Currency currency;
 
   /**
    * If transferType is deposit: The date and time the deposit was first detected If transferType is
@@ -50,6 +57,14 @@ public class KrakenFuturesTransfer {
    * withdrawals
    */
   private BigDecimal amount;
+
+  public Currency getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(Currency currency) {
+    this.currency = currency;
+  }
 
   public Date getReceivedTime() {
     return receivedTime;
