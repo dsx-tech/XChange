@@ -27,7 +27,7 @@ public class KrakenFuturesExchange extends BaseExchange implements Exchange {
 
     ExchangeSpecification exchangeSpecification =
         new ExchangeSpecification(this.getClass().getCanonicalName());
-    exchangeSpecification.setSslUri("https://futures.kraken.com/derivatives/api/v3");
+    exchangeSpecification.setSslUri("https://futures.kraken.com/derivatives");
     exchangeSpecification.setHost("futures.kraken.com");
     exchangeSpecification.setPort(80);
     exchangeSpecification.setExchangeName("KrakenFutures");
