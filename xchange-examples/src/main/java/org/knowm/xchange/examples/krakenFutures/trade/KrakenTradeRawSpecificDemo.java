@@ -1,9 +1,5 @@
 package org.knowm.xchange.examples.krakenFutures.trade;
 
-import static org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct.PI;
-
-import java.math.BigDecimal;
-import java.util.Date;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.examples.krakenFutures.KrakenFuturesExampleUtils;
@@ -14,7 +10,13 @@ import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesFills;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOpenPositions;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrderSendStatusResult;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrders;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesRecentOrderEvents;
 import org.knowm.xchange.krakenFutures.service.service.KrakenFuturesTradeServiceRaw;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import static org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct.PI;
 
 public class KrakenTradeRawSpecificDemo {
 
@@ -25,6 +27,10 @@ public class KrakenTradeRawSpecificDemo {
     // Interested in the private trading functionality (authentication)
     KrakenFuturesTradeServiceRaw tradeService =
         (KrakenFuturesTradeServiceRaw) krakenExchange.getTradeService();
+
+    KrakenFuturesRecentOrderEvents recentOrders =
+        tradeService.recentOrders(PI, CurrencyPair.ETH_USD, null);
+    System.out.println(recentOrders);
 
     KrakenFuturesOrders openOrders = tradeService.openOrders();
     System.out.println(openOrders);

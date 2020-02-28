@@ -35,9 +35,11 @@ public class KrakenFuturesMarketDataService extends KrakenFuturesMarketDataServi
     LocalDate maturityDate =
         KrakenFuturesUtils.getIndexedValue(
             "maturityDate", 1, LocalDate.class, null, product.mustHaveMaturityDate, args);
-    KrakenFuturesTicker krakenTicker = getKrakenTicker(currencyPair, product, maturityDate);
+    KrakenFuturesTicker krakenTicker =
+        getKrakenTicker(
+            KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), product, maturityDate);
 
-    return KrakenFuturesAdapters.adaptTicker(krakenTicker);
+    return KrakenFuturesAdapters.adaptTicker(krakenTicker, currencyPair);
   }
 
   @Override
@@ -47,7 +49,7 @@ public class KrakenFuturesMarketDataService extends KrakenFuturesMarketDataServi
   }
 
   @Override
-  public OrderBook getOrderBook(CurrencyPair currencyPair, Object... args) throws IOException {
+  public OrderBook getOrderBook(CurrencyPair currencyPair, Object... args) {
     KrakenFuturesProduct product =
         KrakenFuturesUtils.getIndexedValue(
             "product", 0, KrakenFuturesProduct.class, null, true, args);
@@ -55,7 +57,8 @@ public class KrakenFuturesMarketDataService extends KrakenFuturesMarketDataServi
         KrakenFuturesUtils.getIndexedValue(
             "maturityDate", 1, LocalDate.class, null, product.mustHaveMaturityDate, args);
     KrakenFuturesOrderBookResult krakenOrderbook =
-        getKrakenOrderbook(currencyPair, product, maturityDate);
+        getKrakenOrderbook(
+            KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), product, maturityDate);
     return KrakenFuturesAdapters.adaptOrderbook(krakenOrderbook, currencyPair);
   }
 
@@ -70,7 +73,9 @@ public class KrakenFuturesMarketDataService extends KrakenFuturesMarketDataServi
     Date lastDate =
         KrakenFuturesUtils.getIndexedValue("lastTime", 2, Date.class, null, false, args);
 
-    KrakenFuturesTrades history = getHistory(product, currencyPair, maturityDate, lastDate);
+    KrakenFuturesTrades history =
+        getHistory(
+            product, KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), maturityDate, lastDate);
     return KrakenFuturesAdapters.adaptTrades(history, currencyPair);
   }
 }

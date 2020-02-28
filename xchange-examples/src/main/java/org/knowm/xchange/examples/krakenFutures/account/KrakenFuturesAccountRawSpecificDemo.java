@@ -23,7 +23,7 @@ public class KrakenFuturesAccountRawSpecificDemo {
 
     KrakenFuturesResult transfer =
         rawKrakenFuturesAcctService.transfer(
-            "cash", "fi_xrpusd", Currency.XRP, new BigDecimal("0.01"));
+            "cash", "fi_xbtusd", Currency.BTC, new BigDecimal("0.01"));
     System.out.println(transfer);
 
     KrakenFuturesTransfers transfers = rawKrakenFuturesAcctService.transfers();

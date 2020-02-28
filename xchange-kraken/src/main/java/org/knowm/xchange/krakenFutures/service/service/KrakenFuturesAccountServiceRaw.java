@@ -24,7 +24,7 @@ public class KrakenFuturesAccountServiceRaw extends KrakenFuturesBaseService {
   public KrakenFuturesResult withdrawalToSpotWallet(Currency currency, BigDecimal amount) {
     return checkResult(
         kraken.withdrawal(
-            nonceFactory.createValue().toString(), apyKey, signatureCreator, currency, amount));
+            nonceFactory.createValue().toString(), apyKey, signatureCreator, currency.getIso4217Currency(), amount));
   }
 
   public KrakenFuturesResult transfer(
@@ -36,7 +36,7 @@ public class KrakenFuturesAccountServiceRaw extends KrakenFuturesBaseService {
             signatureCreator,
             fromAccount,
             toAccount,
-            currency,
+            currency.getIso4217Currency(),
             amount));
   }
 

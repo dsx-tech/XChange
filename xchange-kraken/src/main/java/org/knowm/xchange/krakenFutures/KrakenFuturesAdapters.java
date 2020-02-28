@@ -24,7 +24,19 @@ import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTrades;
 /** @author pchertalev */
 public class KrakenFuturesAdapters {
 
+  public static CurrencyPair adaptCurrencyPair(CurrencyPair currencyPair) {
+    if (currencyPair == null) return null;
+
+    return new CurrencyPair(
+        currencyPair.base.getIso4217Currency().toString(),
+        currencyPair.counter.getIso4217Currency().toString());
+  }
+
   public static Ticker adaptTicker(KrakenFuturesTicker krakenTicker) {
+    return adaptTicker(krakenTicker, null);
+  }
+
+  public static Ticker adaptTicker(KrakenFuturesTicker krakenTicker, CurrencyPair currencyPair) {
     ImmutableTriple<KrakenFuturesProduct, CurrencyPair, LocalDate> productItems =
         KrakenFuturesProduct.parseProductId(krakenTicker.getSymbol());
     Ticker.Builder builder = new Ticker.Builder();
@@ -37,7 +49,7 @@ public class KrakenFuturesAdapters {
     builder.low(krakenTicker.getLow24h());
     builder.volume(toBD(krakenTicker.getVol24h()));
     builder.last(krakenTicker.getLast());
-    builder.currencyPair(productItems.middle);
+    builder.currencyPair(currencyPair == null ? productItems.middle : currencyPair);
     return builder.build();
   }
 

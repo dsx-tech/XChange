@@ -29,16 +29,16 @@ public class KrakenFuturesMarketDataRawDemo {
     System.out.println(instruments);
 
     KrakenFuturesTicker ticker =
-        marketDataServiceRaw.getKrakenTicker(CurrencyPair.BCH_USD, FI, LocalDate.of(20, 3, 27));
+        marketDataServiceRaw.getKrakenTicker(CurrencyPair.BTC_USD, FI, LocalDate.of(20, 3, 27));
     System.out.println(ticker);
 
     KrakenFuturesOrderBookResult orderBook =
-        marketDataServiceRaw.getKrakenOrderbook(CurrencyPair.BCH_USD, FI, LocalDate.of(20, 3, 27));
+        marketDataServiceRaw.getKrakenOrderbook(CurrencyPair.BTC_USD, FI, LocalDate.of(20, 3, 27));
     System.out.println(orderBook);
 
     KrakenFuturesTrades trades =
         marketDataServiceRaw.getHistory(
-            FI, CurrencyPair.BCH_USD, LocalDate.of(20, 3, 27), new Date());
+            FI, CurrencyPair.BTC_USD, LocalDate.of(20, 3, 27), new Date());
     System.out.println(trades);
   }
 }

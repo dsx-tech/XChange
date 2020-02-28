@@ -21,17 +21,17 @@ public class KrakenFuturesMarketDataDemo {
 
     MarketDataService marketDataService = krakenFuturesExchange.getMarketDataService();
 
-    Ticker ticker = marketDataService.getTicker(CurrencyPair.BCH_USD, FI, LocalDate.of(20, 3, 27));
+    Ticker ticker = marketDataService.getTicker(CurrencyPair.BTC_USD, FI, LocalDate.of(20, 3, 27));
     System.out.println(ticker);
 
     List<Ticker> tickers = marketDataService.getTickers(null);
     System.out.println(tickers);
 
     OrderBook orderbook =
-        marketDataService.getOrderBook(CurrencyPair.BCH_USD, FI, LocalDate.of(20, 3, 27));
+        marketDataService.getOrderBook(CurrencyPair.BTC_USD, FI, LocalDate.of(20, 3, 27));
     System.out.println(orderbook);
 
-    Trades trades = marketDataService.getTrades(CurrencyPair.BCH_USD, FI, LocalDate.of(20, 3, 27));
+    Trades trades = marketDataService.getTrades(CurrencyPair.BTC_USD, FI, LocalDate.of(20, 3, 27));
     System.out.println(trades);
   }
 }

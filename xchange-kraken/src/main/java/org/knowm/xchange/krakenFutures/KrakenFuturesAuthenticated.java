@@ -20,6 +20,7 @@ import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesFills;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOpenPositions;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrderSendStatusResult;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrders;
+import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesRecentOrderEvents;
 import org.knowm.xchange.krakenFutures.service.KrakenFuturesDigest;
 
 @Path("/api/v3/")
@@ -106,4 +107,12 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
       @QueryParam("lastTransferTime") Date lastTransferTime);
+
+  @GET
+  @Path("recentorders")
+  KrakenFuturesRecentOrderEvents recentOrders(
+      @HeaderParam("Nonce") String nonce,
+      @HeaderParam("APIKey") String apyKey,
+      @HeaderParam("Authent") KrakenFuturesDigest authent,
+      @HeaderParam("symbol") String symbol);
 }
