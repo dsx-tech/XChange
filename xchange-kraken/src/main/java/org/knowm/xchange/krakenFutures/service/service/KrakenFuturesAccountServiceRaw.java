@@ -17,27 +17,28 @@ public class KrakenFuturesAccountServiceRaw extends KrakenFuturesBaseService {
   }
 
   public KrakenFuturesAccounts accounts() {
-    return checkResult(
-        kraken.accounts(nonceFactory.createValue().toString(), apyKey, signatureCreator));
+    return kraken.accounts(nonceFactory.createValue().toString(), apyKey, signatureCreator);
   }
 
   public KrakenFuturesResult withdrawalToSpotWallet(Currency currency, BigDecimal amount) {
-    return checkResult(
-        kraken.withdrawal(
-            nonceFactory.createValue().toString(), apyKey, signatureCreator, currency.getIso4217Currency(), amount));
+    return kraken.withdrawal(
+        nonceFactory.createValue().toString(),
+        apyKey,
+        signatureCreator,
+        currency.getIso4217Currency(),
+        amount);
   }
 
   public KrakenFuturesResult transfer(
       String fromAccount, String toAccount, Currency currency, BigDecimal amount) {
-    return checkResult(
-        kraken.transfer(
-            nonceFactory.createValue().toString(),
-            apyKey,
-            signatureCreator,
-            fromAccount,
-            toAccount,
-            currency.getIso4217Currency(),
-            amount));
+    return kraken.transfer(
+        nonceFactory.createValue().toString(),
+        apyKey,
+        signatureCreator,
+        fromAccount,
+        toAccount,
+        currency.getIso4217Currency(),
+        amount);
   }
 
   public KrakenFuturesTransfers transfers() {
@@ -45,8 +46,7 @@ public class KrakenFuturesAccountServiceRaw extends KrakenFuturesBaseService {
   }
 
   public KrakenFuturesTransfers transfers(Date lastTransferTime) {
-    return checkResult(
-        kraken.transfers(
-            nonceFactory.createValue().toString(), apyKey, signatureCreator, lastTransferTime));
+    return kraken.transfers(
+        nonceFactory.createValue().toString(), apyKey, signatureCreator, lastTransferTime);
   }
 }

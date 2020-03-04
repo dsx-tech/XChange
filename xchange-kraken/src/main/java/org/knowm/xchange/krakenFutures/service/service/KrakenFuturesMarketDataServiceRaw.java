@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.exceptions.ExchangeException;
-import org.knowm.xchange.krakenFutures.KrakenFuturesAdapters;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesInstruments;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesOrderBookResult;
@@ -29,9 +28,7 @@ public class KrakenFuturesMarketDataServiceRaw extends KrakenFuturesBaseService 
 
   public KrakenFuturesTicker getKrakenTicker(
       CurrencyPair currencyPair, KrakenFuturesProduct product, LocalDate maturityDate) {
-    String productId =
-        product.formatProductId(
-            KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), maturityDate);
+    String productId = product.formatProductId(currencyPair, maturityDate);
     KrakenFuturesTickers tickers = kraken.getTickers();
     return tickers.getTickers().stream()
         .filter(ticker -> productId.equalsIgnoreCase(ticker.getSymbol()))
@@ -41,9 +38,7 @@ public class KrakenFuturesMarketDataServiceRaw extends KrakenFuturesBaseService 
 
   public KrakenFuturesOrderBookResult getKrakenOrderbook(
       CurrencyPair currencyPair, KrakenFuturesProduct product, LocalDate maturityDate) {
-    String productId =
-        product.formatProductId(
-            KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), maturityDate);
+    String productId = product.formatProductId(currencyPair, maturityDate);
     return kraken.getOrderbook(productId);
   }
 
@@ -53,8 +48,7 @@ public class KrakenFuturesMarketDataServiceRaw extends KrakenFuturesBaseService 
 
   public KrakenFuturesTrades getHistory(
       KrakenFuturesProduct product, CurrencyPair currencyPair, LocalDate maturityDate) {
-    return getHistory(
-        product, KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), maturityDate, null);
+    return getHistory(product, currencyPair, maturityDate, null);
   }
 
   public KrakenFuturesTrades getHistory(
@@ -65,10 +59,7 @@ public class KrakenFuturesMarketDataServiceRaw extends KrakenFuturesBaseService 
     if (product == null || currencyPair == null) {
       throw new ExchangeException("product and currency pair are mandatory");
     }
-    return getHistory(
-        product.formatProductId(
-            KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), maturityDate),
-        lastTime);
+    return getHistory(product.formatProductId(currencyPair, maturityDate), lastTime);
   }
 
   public KrakenFuturesTrades getHistory(String symbol, Date lastTime) {

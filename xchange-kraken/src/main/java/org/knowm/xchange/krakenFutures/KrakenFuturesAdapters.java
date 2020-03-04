@@ -24,14 +24,6 @@ import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTrades;
 /** @author pchertalev */
 public class KrakenFuturesAdapters {
 
-  public static CurrencyPair adaptCurrencyPair(CurrencyPair currencyPair) {
-    if (currencyPair == null) return null;
-
-    return new CurrencyPair(
-        currencyPair.base.getIso4217Currency().toString(),
-        currencyPair.counter.getIso4217Currency().toString());
-  }
-
   public static Ticker adaptTicker(KrakenFuturesTicker krakenTicker) {
     return adaptTicker(krakenTicker, null);
   }

@@ -6,6 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import org.knowm.xchange.krakenFutures.dto.KrakenFuturesResultException;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesInstruments;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesOrderBookResult;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesTickers;
@@ -17,18 +18,20 @@ public interface KrakenFutures {
 
   @GET
   @Path("tickers")
-  KrakenFuturesTickers getTickers();
+  KrakenFuturesTickers getTickers() throws KrakenFuturesResultException;
 
   @GET
   @Path("instruments")
-  KrakenFuturesInstruments getInstruments();
+  KrakenFuturesInstruments getInstruments() throws KrakenFuturesResultException;
 
   @GET
   @Path("orderbook")
-  KrakenFuturesOrderBookResult getOrderbook(@QueryParam("symbol") String symbol);
+  KrakenFuturesOrderBookResult getOrderbook(@QueryParam("symbol") String symbol)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("history")
   KrakenFuturesTrades history(
-      @QueryParam("symbol") String symbol, @QueryParam("lastTime") Date lastTime);
+      @QueryParam("symbol") String symbol, @QueryParam("lastTime") Date lastTime)
+      throws KrakenFuturesResultException;
 }

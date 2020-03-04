@@ -11,12 +11,6 @@ import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct;
 public class KrakenFuturesProductTest {
 
   @Test
-  public void testAdaptCurrencyPair() {
-    Assert.assertEquals(
-        CurrencyPair.XBT_USD, KrakenFuturesAdapters.adaptCurrencyPair(CurrencyPair.BTC_USD));
-  }
-
-  @Test
   public void parseProductValidFI() {
     ImmutableTriple<KrakenFuturesProduct, CurrencyPair, LocalDate> result =
         KrakenFuturesProduct.parseProductId("fi_ethbtc_200311");

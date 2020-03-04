@@ -10,6 +10,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.krakenFutures.dto.KrakenFuturesResult;
+import org.knowm.xchange.krakenFutures.dto.KrakenFuturesResultException;
 import org.knowm.xchange.krakenFutures.dto.account.KrakenFuturesAccounts;
 import org.knowm.xchange.krakenFutures.dto.account.KrakenFuturesTransfers;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesOrderType;
@@ -32,14 +33,16 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
   KrakenFuturesAccounts accounts(
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
-      @HeaderParam("Authent") KrakenFuturesDigest authent);
+      @HeaderParam("Authent") KrakenFuturesDigest authent)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("openorders")
   KrakenFuturesOrders getOpenOrders(
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
-      @HeaderParam("Authent") KrakenFuturesDigest authent);
+      @HeaderParam("Authent") KrakenFuturesDigest authent)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("sendorder")
@@ -55,7 +58,8 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @QueryParam("stopPrice") BigDecimal stopPrice,
       @QueryParam("triggerSignal") KrakenFuturesTrigerSignal triggerSignal,
       @QueryParam("cliOrdId") String cliOrdId,
-      @QueryParam("reduceOnly") Boolean reduceOnly);
+      @QueryParam("reduceOnly") Boolean reduceOnly)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("fills")
@@ -63,14 +67,16 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
-      @QueryParam("lastFillTime") Date lastFillTime);
+      @QueryParam("lastFillTime") Date lastFillTime)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("openpositions")
   KrakenFuturesOpenPositions openPositions(
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
-      @HeaderParam("Authent") KrakenFuturesDigest authent);
+      @HeaderParam("Authent") KrakenFuturesDigest authent)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("cancelallorders")
@@ -78,7 +84,8 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
-      @QueryParam("symbol") String symbol);
+      @QueryParam("symbol") String symbol)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("withdrawal")
@@ -87,7 +94,8 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
       @QueryParam("currency") Currency currency,
-      @QueryParam("amount") BigDecimal amount);
+      @QueryParam("amount") BigDecimal amount)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("transfer")
@@ -98,7 +106,8 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @QueryParam("fromAccount") String fromAccount,
       @QueryParam("toAccount") String toAccount,
       @QueryParam("unit") Currency currency,
-      @QueryParam("amount") BigDecimal amount);
+      @QueryParam("amount") BigDecimal amount)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("transfers")
@@ -106,7 +115,8 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
-      @QueryParam("lastTransferTime") Date lastTransferTime);
+      @QueryParam("lastTransferTime") Date lastTransferTime)
+      throws KrakenFuturesResultException;
 
   @GET
   @Path("recentorders")
@@ -114,5 +124,6 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
-      @HeaderParam("symbol") String symbol);
+      @HeaderParam("symbol") String symbol)
+      throws KrakenFuturesResultException;
 }
