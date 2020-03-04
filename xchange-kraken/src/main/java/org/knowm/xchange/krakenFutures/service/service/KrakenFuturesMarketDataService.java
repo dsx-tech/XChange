@@ -35,9 +35,7 @@ public class KrakenFuturesMarketDataService extends KrakenFuturesMarketDataServi
     LocalDate maturityDate =
         KrakenFuturesUtils.getIndexedValue(
             "maturityDate", 1, LocalDate.class, null, product.mustHaveMaturityDate, args);
-    KrakenFuturesTicker krakenTicker =
-        getKrakenTicker(
-            KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), product, maturityDate);
+    KrakenFuturesTicker krakenTicker = getKrakenTicker(currencyPair, product, maturityDate);
 
     return KrakenFuturesAdapters.adaptTicker(krakenTicker, currencyPair);
   }
@@ -57,8 +55,7 @@ public class KrakenFuturesMarketDataService extends KrakenFuturesMarketDataServi
         KrakenFuturesUtils.getIndexedValue(
             "maturityDate", 1, LocalDate.class, null, product.mustHaveMaturityDate, args);
     KrakenFuturesOrderBookResult krakenOrderbook =
-        getKrakenOrderbook(
-            KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), product, maturityDate);
+        getKrakenOrderbook(currencyPair, product, maturityDate);
     return KrakenFuturesAdapters.adaptOrderbook(krakenOrderbook, currencyPair);
   }
 
@@ -73,9 +70,7 @@ public class KrakenFuturesMarketDataService extends KrakenFuturesMarketDataServi
     Date lastDate =
         KrakenFuturesUtils.getIndexedValue("lastTime", 2, Date.class, null, false, args);
 
-    KrakenFuturesTrades history =
-        getHistory(
-            product, KrakenFuturesAdapters.adaptCurrencyPair(currencyPair), maturityDate, lastDate);
+    KrakenFuturesTrades history = getHistory(product, currencyPair, maturityDate, lastDate);
     return KrakenFuturesAdapters.adaptTrades(history, currencyPair);
   }
 }

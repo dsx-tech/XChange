@@ -1,5 +1,9 @@
 package org.knowm.xchange.examples.krakenFutures.trade;
 
+import static org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct.PI;
+
+import java.math.BigDecimal;
+import java.util.Date;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.examples.krakenFutures.KrakenFuturesExampleUtils;
@@ -12,11 +16,6 @@ import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrderSendStatusRes
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesOrders;
 import org.knowm.xchange.krakenFutures.dto.trade.KrakenFuturesRecentOrderEvents;
 import org.knowm.xchange.krakenFutures.service.service.KrakenFuturesTradeServiceRaw;
-
-import java.math.BigDecimal;
-import java.util.Date;
-
-import static org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct.PI;
 
 public class KrakenTradeRawSpecificDemo {
 
