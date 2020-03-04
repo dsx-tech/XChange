@@ -1,6 +1,5 @@
 package org.knowm.xchange.krakenFutures.dto.trade;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.util.Date;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesOrderStatus;
@@ -9,11 +8,11 @@ import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesSide;
 
 public class KrakenFuturesOrder {
 
-  /** The date and time the order was received */
-  private Date receivedTime;
+  /** The date and time the order was placed */
+  private Date timestamp;
 
   /** The date and time the order was last updated */
-  private Date lastUpdateTime;
+  private Date lastUpdateTimestamp;
 
   /**
    * The status of the order, either of: untouched: the entire size of the order is unfilled
@@ -22,7 +21,6 @@ public class KrakenFuturesOrder {
   private KrakenFuturesOrderStatus status;
 
   /** The unique identifier of the order */
-  @JsonProperty("order_id")
   private String orderId;
 
   /**
@@ -32,7 +30,7 @@ public class KrakenFuturesOrder {
   private String cliOrdId;
 
   /** The order type, either lmt for a limit order or stp for a stop order */
-  private KrakenFuturesOrderType orderType;
+  private KrakenFuturesOrderType type;
 
   /** The symbol of the futures the order refers to. */
   private String symbol;
@@ -44,7 +42,7 @@ public class KrakenFuturesOrder {
   private Long unfilledSize;
 
   /** The filled size associated with the order */
-  private Long filledSize;
+  private Long filled;
 
   /** The limit price associated with the order */
   private BigDecimal limitPrice;
@@ -55,23 +53,20 @@ public class KrakenFuturesOrder {
    */
   private BigDecimal stopPrice;
 
-  /** The date and time the order was placed */
-  private Date timestamp;
-
-  public Date getReceivedTime() {
-    return receivedTime;
+  public Date getTimestamp() {
+    return timestamp;
   }
 
-  public void setReceivedTime(Date receivedTime) {
-    this.receivedTime = receivedTime;
+  public void setTimestamp(Date timestamp) {
+    this.timestamp = timestamp;
   }
 
-  public Date getLastUpdateTime() {
-    return lastUpdateTime;
+  public Date getLastUpdateTimestamp() {
+    return lastUpdateTimestamp;
   }
 
-  public void setLastUpdateTime(Date lastUpdateTime) {
-    this.lastUpdateTime = lastUpdateTime;
+  public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
+    this.lastUpdateTimestamp = lastUpdateTimestamp;
   }
 
   public KrakenFuturesOrderStatus getStatus() {
@@ -98,12 +93,12 @@ public class KrakenFuturesOrder {
     this.cliOrdId = cliOrdId;
   }
 
-  public KrakenFuturesOrderType getOrderType() {
-    return orderType;
+  public KrakenFuturesOrderType getType() {
+    return type;
   }
 
-  public void setOrderType(KrakenFuturesOrderType orderType) {
-    this.orderType = orderType;
+  public void setType(KrakenFuturesOrderType type) {
+    this.type = type;
   }
 
   public String getSymbol() {
@@ -130,12 +125,12 @@ public class KrakenFuturesOrder {
     this.unfilledSize = unfilledSize;
   }
 
-  public Long getFilledSize() {
-    return filledSize;
+  public Long getFilled() {
+    return filled;
   }
 
-  public void setFilledSize(Long filledSize) {
-    this.filledSize = filledSize;
+  public void setFilled(Long filled) {
+    this.filled = filled;
   }
 
   public BigDecimal getLimitPrice() {
