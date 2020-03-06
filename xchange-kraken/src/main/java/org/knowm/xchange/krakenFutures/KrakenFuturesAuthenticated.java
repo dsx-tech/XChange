@@ -1,5 +1,6 @@
 package org.knowm.xchange.krakenFutures;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.ws.rs.GET;
@@ -34,7 +35,7 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("openorders")
@@ -42,7 +43,7 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("sendorder")
@@ -59,7 +60,7 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @QueryParam("triggerSignal") KrakenFuturesTrigerSignal triggerSignal,
       @QueryParam("cliOrdId") String cliOrdId,
       @QueryParam("reduceOnly") Boolean reduceOnly)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("fills")
@@ -68,7 +69,7 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
       @QueryParam("lastFillTime") Date lastFillTime)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("openpositions")
@@ -76,7 +77,7 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("Nonce") String nonce,
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("cancelallorders")
@@ -85,7 +86,7 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
       @QueryParam("symbol") String symbol)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("withdrawal")
@@ -95,7 +96,7 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("Authent") KrakenFuturesDigest authent,
       @QueryParam("currency") Currency currency,
       @QueryParam("amount") BigDecimal amount)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("transfer")
@@ -107,7 +108,7 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @QueryParam("toAccount") String toAccount,
       @QueryParam("unit") Currency currency,
       @QueryParam("amount") BigDecimal amount)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("transfers")
@@ -116,7 +117,7 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
       @QueryParam("lastTransferTime") Date lastTransferTime)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("recentorders")
@@ -125,5 +126,5 @@ public interface KrakenFuturesAuthenticated extends KrakenFutures {
       @HeaderParam("APIKey") String apyKey,
       @HeaderParam("Authent") KrakenFuturesDigest authent,
       @HeaderParam("symbol") String symbol)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 }

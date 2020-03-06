@@ -2,6 +2,7 @@ package org.knowm.xchange.examples.krakenFutures.marketdata;
 
 import static org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct.FI;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 import org.knowm.xchange.Exchange;
@@ -16,7 +17,7 @@ import org.knowm.xchange.service.marketdata.MarketDataService;
 
 public class KrakenFuturesMarketDataRawDemo {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
 
     Exchange krakenFuturesExchange = KrakenFuturesExampleUtils.createTestExchange();
 

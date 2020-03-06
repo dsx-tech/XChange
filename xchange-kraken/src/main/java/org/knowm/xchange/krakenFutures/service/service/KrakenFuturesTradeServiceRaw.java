@@ -1,10 +1,11 @@
 package org.knowm.xchange.krakenFutures.service.service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
-import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.krakenFutures.KrakenFuturesExchange;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesOrderType;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesSide;
@@ -20,11 +21,11 @@ import org.knowm.xchange.krakenFutures.service.KrakenFuturesBaseService;
 /** @author pchertalev */
 public class KrakenFuturesTradeServiceRaw extends KrakenFuturesBaseService {
 
-  public KrakenFuturesTradeServiceRaw(Exchange exchange) {
+  public KrakenFuturesTradeServiceRaw(KrakenFuturesExchange exchange) {
     super(exchange);
   }
 
-  public KrakenFuturesOrders openOrders() {
+  public KrakenFuturesOrders openOrders() throws IOException {
     return kraken.getOpenOrders(nonceFactory.createValue().toString(), apyKey, signatureCreator);
   }
 
@@ -35,21 +36,24 @@ public class KrakenFuturesTradeServiceRaw extends KrakenFuturesBaseService {
       LocalDate localDate,
       KrakenFuturesSide side,
       Long size,
-      BigDecimal limitPrice) {
+      BigDecimal limitPrice)
+      throws IOException {
     String symbol = product.formatProductId(currencyPair, localDate);
-    return kraken.sendOrder(
-        nonceFactory.createValue().toString(),
-        apyKey,
-        signatureCreator,
-        orderType,
-        symbol,
-        side,
-        size,
-        limitPrice,
-        null,
-        null,
-        null,
-        null);
+    return check(
+        () ->
+            kraken.sendOrder(
+                nonceFactory.createValue().toString(),
+                apyKey,
+                signatureCreator,
+                orderType,
+                symbol,
+                side,
+                size,
+                limitPrice,
+                null,
+                null,
+                null,
+                null));
   }
 
   public KrakenFuturesOrderSendStatusResult sendOrder(
@@ -63,21 +67,24 @@ public class KrakenFuturesTradeServiceRaw extends KrakenFuturesBaseService {
       BigDecimal stopPrice,
       KrakenFuturesTrigerSignal triggerSignal,
       String cliOrdId,
-      Boolean reduceOnly) {
+      Boolean reduceOnly)
+      throws IOException {
     String symbol = product.formatProductId(currencyPair, localDate);
-    return kraken.sendOrder(
-        nonceFactory.createValue().toString(),
-        apyKey,
-        signatureCreator,
-        orderType,
-        symbol,
-        side,
-        size,
-        limitPrice,
-        stopPrice,
-        triggerSignal,
-        cliOrdId,
-        reduceOnly);
+    return check(
+        () ->
+            kraken.sendOrder(
+                nonceFactory.createValue().toString(),
+                apyKey,
+                signatureCreator,
+                orderType,
+                symbol,
+                side,
+                size,
+                limitPrice,
+                stopPrice,
+                triggerSignal,
+                cliOrdId,
+                reduceOnly));
   }
 
   /**
@@ -87,30 +94,38 @@ public class KrakenFuturesTradeServiceRaw extends KrakenFuturesBaseService {
    *     provided, returns the 100 entries before lastFillTime.
    * @return fills
    */
-  public KrakenFuturesFills fills(Date lastFillTime) {
-    return kraken.fills(
-        nonceFactory.createValue().toString(), apyKey, signatureCreator, lastFillTime);
+  public KrakenFuturesFills fills(Date lastFillTime) throws IOException {
+    return check(
+        () ->
+            kraken.fills(
+                nonceFactory.createValue().toString(), apyKey, signatureCreator, lastFillTime));
   }
 
   public KrakenFuturesRecentOrderEvents recentOrders(
-      KrakenFuturesProduct product, CurrencyPair currencyPair, LocalDate maturityDate) {
-    return kraken.recentOrders(
-        nonceFactory.createValue().toString(),
-        apyKey,
-        signatureCreator,
-        product.formatProductId(currencyPair, maturityDate));
+      KrakenFuturesProduct product, CurrencyPair currencyPair, LocalDate maturityDate)
+      throws IOException {
+    return check(
+        () ->
+            kraken.recentOrders(
+                nonceFactory.createValue().toString(),
+                apyKey,
+                signatureCreator,
+                product.formatProductId(currencyPair, maturityDate)));
   }
 
-  public KrakenFuturesOpenPositions openPositions() {
-    return kraken.openPositions(nonceFactory.createValue().toString(), apyKey, signatureCreator);
+  public KrakenFuturesOpenPositions openPositions() throws IOException {
+    return check(
+        () ->
+            kraken.openPositions(nonceFactory.createValue().toString(), apyKey, signatureCreator));
   }
 
-  public KrakenCancelAllOrders cancelAllOrders() {
+  public KrakenCancelAllOrders cancelAllOrders() throws IOException {
     return cancelAllOrders(null);
   }
 
   public KrakenCancelAllOrders cancelAllOrders(
-      KrakenFuturesProduct product, CurrencyPair currencyPair, LocalDate maturityDate) {
+      KrakenFuturesProduct product, CurrencyPair currencyPair, LocalDate maturityDate)
+      throws IOException {
     if (product == null || currencyPair == null) {
       return cancelAllOrders(null);
     }
@@ -118,8 +133,10 @@ public class KrakenFuturesTradeServiceRaw extends KrakenFuturesBaseService {
     return cancelAllOrders(symbol);
   }
 
-  private KrakenCancelAllOrders cancelAllOrders(String symbol) {
-    return kraken.cancelAllOrders(
-        nonceFactory.createValue().toString(), apyKey, signatureCreator, symbol);
+  private KrakenCancelAllOrders cancelAllOrders(String symbol) throws IOException {
+    return check(
+        () ->
+            kraken.cancelAllOrders(
+                nonceFactory.createValue().toString(), apyKey, signatureCreator, symbol));
   }
 }
