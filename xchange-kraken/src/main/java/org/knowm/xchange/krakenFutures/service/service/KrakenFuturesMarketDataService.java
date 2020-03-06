@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trades;
 import org.knowm.xchange.krakenFutures.KrakenFuturesAdapters;
+import org.knowm.xchange.krakenFutures.KrakenFuturesExchange;
 import org.knowm.xchange.krakenFutures.KrakenFuturesUtils;
 import org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct;
 import org.knowm.xchange.krakenFutures.dto.marketdata.KrakenFuturesOrderBookResult;
@@ -23,12 +23,12 @@ import org.knowm.xchange.service.marketdata.params.Params;
 public class KrakenFuturesMarketDataService extends KrakenFuturesMarketDataServiceRaw
     implements MarketDataService {
 
-  public KrakenFuturesMarketDataService(Exchange exchange) {
+  public KrakenFuturesMarketDataService(KrakenFuturesExchange exchange) {
     super(exchange);
   }
 
   @Override
-  public Ticker getTicker(CurrencyPair currencyPair, Object... args) {
+  public Ticker getTicker(CurrencyPair currencyPair, Object... args) throws IOException {
     KrakenFuturesProduct product =
         KrakenFuturesUtils.getIndexedValue(
             "product", 0, KrakenFuturesProduct.class, null, true, args);
@@ -41,13 +41,13 @@ public class KrakenFuturesMarketDataService extends KrakenFuturesMarketDataServi
   }
 
   @Override
-  public List<Ticker> getTickers(Params params) {
+  public List<Ticker> getTickers(Params params) throws IOException {
     KrakenFuturesTickers krakenTickers = getKrakenTickers();
     return KrakenFuturesAdapters.adaptTickers(krakenTickers);
   }
 
   @Override
-  public OrderBook getOrderBook(CurrencyPair currencyPair, Object... args) {
+  public OrderBook getOrderBook(CurrencyPair currencyPair, Object... args) throws IOException {
     KrakenFuturesProduct product =
         KrakenFuturesUtils.getIndexedValue(
             "product", 0, KrakenFuturesProduct.class, null, true, args);

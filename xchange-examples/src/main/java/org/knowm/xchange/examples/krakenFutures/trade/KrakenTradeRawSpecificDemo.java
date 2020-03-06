@@ -2,6 +2,7 @@ package org.knowm.xchange.examples.krakenFutures.trade;
 
 import static org.knowm.xchange.krakenFutures.dto.enums.KrakenFuturesProduct.PI;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 import org.knowm.xchange.Exchange;
@@ -19,7 +20,7 @@ import org.knowm.xchange.krakenFutures.service.service.KrakenFuturesTradeService
 
 public class KrakenTradeRawSpecificDemo {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
 
     Exchange krakenExchange = KrakenFuturesExampleUtils.createTestExchange();
 

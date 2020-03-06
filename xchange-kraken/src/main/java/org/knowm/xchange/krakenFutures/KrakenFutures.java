@@ -1,5 +1,6 @@
 package org.knowm.xchange.krakenFutures;
 
+import java.io.IOException;
 import java.util.Date;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,20 +19,20 @@ public interface KrakenFutures {
 
   @GET
   @Path("tickers")
-  KrakenFuturesTickers getTickers() throws KrakenFuturesResultException;
+  KrakenFuturesTickers getTickers() throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("instruments")
-  KrakenFuturesInstruments getInstruments() throws KrakenFuturesResultException;
+  KrakenFuturesInstruments getInstruments() throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("orderbook")
   KrakenFuturesOrderBookResult getOrderbook(@QueryParam("symbol") String symbol)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 
   @GET
   @Path("history")
   KrakenFuturesTrades history(
       @QueryParam("symbol") String symbol, @QueryParam("lastTime") Date lastTime)
-      throws KrakenFuturesResultException;
+      throws KrakenFuturesResultException, IOException;
 }

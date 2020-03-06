@@ -1,5 +1,6 @@
 package org.knowm.xchange.examples.krakenFutures.account;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
@@ -11,7 +12,7 @@ import org.knowm.xchange.krakenFutures.service.service.KrakenFuturesAccountServi
 
 public class KrakenFuturesAccountRawSpecificDemo {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
 
     Exchange krakenExchange = KrakenFuturesExampleUtils.createTestExchange();
 
