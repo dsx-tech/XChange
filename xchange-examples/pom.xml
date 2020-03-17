@@ -225,6 +225,13 @@
 			<version>${project.version}</version>
 		</dependency>
 
+		<!-- XChange Bequant exchange support -->
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-bequant</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<!-- XChange Paymium exchange support -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
