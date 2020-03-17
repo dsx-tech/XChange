@@ -9,7 +9,7 @@
 
     <groupId>org.knowm.xchange</groupId>
     <artifactId>xchange-parent</artifactId>
-    <version>4.4.0</version>
+    <version>4.4.0.1-dsx-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>XChange</name>
