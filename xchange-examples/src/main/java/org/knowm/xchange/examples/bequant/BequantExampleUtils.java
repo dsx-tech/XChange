@@ -10,8 +10,8 @@ public class BequantExampleUtils {
   public static Exchange createExchange() {
 
     ExchangeSpecification exSpec = new ExchangeSpecification(BequantExchange.class);
-    exSpec.setApiKey("wfuWflGiQwU4mN92pyxvTLO0rCfnmzXL");
-    exSpec.setSecretKey("DMmyIWF1K93CvmcH36oaeyOMkTGHwn47");
+    exSpec.setApiKey("api key");
+    exSpec.setSecretKey("api secret");
 
     return ExchangeFactory.INSTANCE.createExchange(exSpec);
   }
