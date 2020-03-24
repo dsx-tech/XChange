@@ -188,6 +188,12 @@
 			<artifactId>xchange-coingi</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!-- XChange DSX global exchange support -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>xchange-dsx</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- XChange ANX exchange support -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
