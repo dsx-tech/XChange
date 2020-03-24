@@ -6,7 +6,7 @@
     <parent>
         <artifactId>xchange-parent</artifactId>
         <groupId>org.knowm.xchange</groupId>
-        <version>4.3.15-dsx</version>
+        <version>4.3.15.1-dsxglobal</version>
     </parent>
 
     <artifactId>xchange-abucoins</artifactId>
