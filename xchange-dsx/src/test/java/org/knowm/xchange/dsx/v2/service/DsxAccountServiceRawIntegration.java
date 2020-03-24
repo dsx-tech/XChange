@@ -133,7 +133,6 @@ public class DsxAccountServiceRawIntegration extends BaseAuthenticatedServiceTes
 
     exception.expect(HttpStatusIOException.class);
     exception.expectMessage("HTTP status code was not OK: 400");
-    service.transferFunds(
-        Currency.USD, new BigDecimal("0.01"), DsxTransferType.BANK_TO_EXCHANGE);
+    service.transferFunds(Currency.USD, new BigDecimal("0.01"), DsxTransferType.BANK_TO_EXCHANGE);
   }
 }

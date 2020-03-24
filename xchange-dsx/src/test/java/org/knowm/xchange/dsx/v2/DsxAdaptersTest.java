@@ -9,8 +9,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.dto.account.AccountInfo;
 import org.knowm.xchange.dsx.v2.dto.DsxBalance;
+import org.knowm.xchange.dto.account.AccountInfo;
 
 public class DsxAdaptersTest {
 
@@ -27,8 +27,7 @@ public class DsxAdaptersTest {
 
       AccountInfo accountInfo =
           new AccountInfo(
-              DsxAdapters.adaptWallet("Main", main),
-              DsxAdapters.adaptWallet("Trading", trading));
+              DsxAdapters.adaptWallet("Main", main), DsxAdapters.adaptWallet("Trading", trading));
 
       assertThat(accountInfo).isNotNull();
 

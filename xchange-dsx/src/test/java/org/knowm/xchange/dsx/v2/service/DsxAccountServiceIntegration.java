@@ -39,8 +39,7 @@ public class DsxAccountServiceIntegration extends BaseAuthenticatedServiceTest {
   @Test
   public void testGetFundingHistory() throws IOException {
 
-    DsxFundingHistoryParams dsxTradeHistoryParams =
-        DsxFundingHistoryParams.builder().build();
+    DsxFundingHistoryParams dsxTradeHistoryParams = DsxFundingHistoryParams.builder().build();
 
     List<FundingRecord> records = service.getFundingHistory(dsxTradeHistoryParams);
 

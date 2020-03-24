@@ -7,15 +7,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.knowm.xchange.Exchange;
+import org.knowm.xchange.dsx.v2.DsxAdapters;
 import org.knowm.xchange.dsx.v2.dto.DsxBalance;
+import org.knowm.xchange.dsx.v2.dto.DsxLimitOrder;
+import org.knowm.xchange.dsx.v2.dto.DsxMarketOrder;
 import org.knowm.xchange.dsx.v2.dto.DsxOrder;
 import org.knowm.xchange.dsx.v2.dto.DsxOwnTrade;
 import org.knowm.xchange.dsx.v2.dto.DsxSort;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.dto.trade.MarketOrder;
-import org.knowm.xchange.dsx.v2.DsxAdapters;
-import org.knowm.xchange.dsx.v2.dto.DsxLimitOrder;
-import org.knowm.xchange.dsx.v2.dto.DsxMarketOrder;
 
 public class DsxTradeServiceRaw extends DsxBaseService {
 
@@ -101,17 +101,16 @@ public class DsxTradeServiceRaw extends DsxBaseService {
   }
 
   public List<DsxOwnTrade> getTradeHistoryRaw(
-          String symbol, DsxSort sort, Date from, Date till, Integer limit, long offset)
+      String symbol, DsxSort sort, Date from, Date till, Integer limit, long offset)
       throws IOException {
     String sortValue = sort != null ? sort.toString().toUpperCase() : null;
     String fromValue = from != null ? Instant.ofEpochMilli(from.getTime()).toString() : null;
     String tillValue = till != null ? Instant.ofEpochMilli(till.getTime()).toString() : null;
-    return dsx.getDsxTrades(
-        symbol, sortValue, "timestamp", fromValue, tillValue, limit, offset);
+    return dsx.getDsxTrades(symbol, sortValue, "timestamp", fromValue, tillValue, limit, offset);
   }
 
   public List<DsxOwnTrade> getTradeHistoryRaw(
-          String symbol, DsxSort sort, Long fromId, Long tillId, Integer limit, long offset)
+      String symbol, DsxSort sort, Long fromId, Long tillId, Integer limit, long offset)
       throws IOException {
     String sortValue = sort != null ? sort.toString().toUpperCase() : null;
     String fromValue = fromId != null ? fromId.toString() : null;

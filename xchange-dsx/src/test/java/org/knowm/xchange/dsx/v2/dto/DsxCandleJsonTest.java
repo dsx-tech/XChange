@@ -17,7 +17,7 @@ public class DsxCandleJsonTest {
     // Read in the JSON from the example resources
     InputStream is =
         DsxCandleJsonTest.class.getResourceAsStream(
-                "/org/knowm/xchange/dsx/v2/dto/marketdata/example-candles-data.json");
+            "/org/knowm/xchange/dsx/v2/dto/marketdata/example-candles-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

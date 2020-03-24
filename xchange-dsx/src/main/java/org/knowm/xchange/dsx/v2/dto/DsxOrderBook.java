@@ -8,7 +8,7 @@ public class DsxOrderBook {
   private final DsxOrderLimit[] bids;
 
   public DsxOrderBook(
-          @JsonProperty("ask") DsxOrderLimit[] asks, @JsonProperty("bid") DsxOrderLimit[] bids) {
+      @JsonProperty("ask") DsxOrderLimit[] asks, @JsonProperty("bid") DsxOrderLimit[] bids) {
 
     this.asks = asks;
     this.bids = bids;

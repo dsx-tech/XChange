@@ -40,9 +40,7 @@ public class DsxMarketDataServiceRaw extends DsxBaseService {
   public Map<String, DsxTicker> getDsxTickers() throws IOException {
 
     return dsx.getDsxTickers().stream()
-        .collect(
-            Collectors.toMap(
-                    dsxTicker -> dsxTicker.getSymbol(), dsxTicker -> dsxTicker));
+        .collect(Collectors.toMap(dsxTicker -> dsxTicker.getSymbol(), dsxTicker -> dsxTicker));
   }
 
   public DsxTicker getDsxTicker(CurrencyPair currencyPair) throws IOException {
@@ -55,8 +53,7 @@ public class DsxMarketDataServiceRaw extends DsxBaseService {
     return dsx.getOrderBook(DsxAdapters.adaptCurrencyPair(currencyPair), null);
   }
 
-  public DsxOrderBook getDsxOrderBook(CurrencyPair currencyPair, Integer limit)
-      throws IOException {
+  public DsxOrderBook getDsxOrderBook(CurrencyPair currencyPair, Integer limit) throws IOException {
 
     return dsx.getOrderBook(DsxAdapters.adaptCurrencyPair(currencyPair), limit);
   }
@@ -112,8 +109,7 @@ public class DsxMarketDataServiceRaw extends DsxBaseService {
   public List<DsxCandle> getDsxCandles(
       CurrencyPair currencyPair, int limit, String period, String sort) throws IOException {
 
-    return dsx.getDsxOHLC(
-        DsxAdapters.adaptCurrencyPair(currencyPair), limit, period, sort);
+    return dsx.getDsxOHLC(DsxAdapters.adaptCurrencyPair(currencyPair), limit, period, sort);
   }
 
   public List<DsxCandle> getDsxCandles(
@@ -128,7 +124,6 @@ public class DsxMarketDataServiceRaw extends DsxBaseService {
       CurrencyPair currencyPair, int limit, String period, int offset, String sort)
       throws IOException {
 
-    return dsx.getDsxOHLC(
-        DsxAdapters.adaptCurrencyPair(currencyPair), limit, period, offset, sort);
+    return dsx.getDsxOHLC(DsxAdapters.adaptCurrencyPair(currencyPair), limit, period, offset, sort);
   }
 }

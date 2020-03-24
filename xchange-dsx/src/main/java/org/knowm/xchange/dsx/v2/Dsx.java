@@ -7,7 +7,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
-
 import org.knowm.xchange.dsx.v2.dto.DsxCandle;
 import org.knowm.xchange.dsx.v2.dto.DsxCurrency;
 import org.knowm.xchange.dsx.v2.dto.DsxOrderBook;
@@ -41,8 +40,8 @@ public interface Dsx {
 
   @GET
   @Path("public/orderbook/{symbol}")
-  DsxOrderBook getOrderBook(
-      @PathParam("symbol") String symbol, @QueryParam("limit") Integer limit) throws IOException;
+  DsxOrderBook getOrderBook(@PathParam("symbol") String symbol, @QueryParam("limit") Integer limit)
+      throws IOException;
 
   @GET
   @Path("public/trades/{symbol}")

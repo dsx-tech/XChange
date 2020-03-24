@@ -26,7 +26,6 @@ import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.dto.trade.OpenOrders;
 import org.knowm.xchange.dto.trade.UserTrade;
 import org.knowm.xchange.dto.trade.UserTrades;
-import org.knowm.xchange.dsx.v2.dto.*;
 
 public class DsxAdapters {
 
@@ -41,12 +40,10 @@ public class DsxAdapters {
                 .getDsxSymbols().stream()
                     .collect(
                         Collectors.toMap(
-                            dsxSymbol ->
-                                dsxSymbol.getBaseCurrency() + dsxSymbol.getQuoteCurrency(),
+                            dsxSymbol -> dsxSymbol.getBaseCurrency() + dsxSymbol.getQuoteCurrency(),
                             dsxSymbol ->
                                 new CurrencyPair(
-                                    dsxSymbol.getBaseCurrency(),
-                                    dsxSymbol.getQuoteCurrency())));
+                                    dsxSymbol.getBaseCurrency(), dsxSymbol.getQuoteCurrency())));
       } catch (Exception ignored) {
       }
     }
@@ -98,8 +95,7 @@ public class DsxAdapters {
     return tickers;
   }
 
-  public static OrderBook adaptOrderBook(
-          DsxOrderBook dsxOrderBook, CurrencyPair currencyPair) {
+  public static OrderBook adaptOrderBook(DsxOrderBook dsxOrderBook, CurrencyPair currencyPair) {
 
     List<LimitOrder> asks =
         adaptMarketOrderToLimitOrder(dsxOrderBook.getAsks(), OrderType.ASK, currencyPair);
@@ -110,7 +106,7 @@ public class DsxAdapters {
   }
 
   private static List<LimitOrder> adaptMarketOrderToLimitOrder(
-          DsxOrderLimit[] dsxOrders, OrderType orderType, CurrencyPair currencyPair) {
+      DsxOrderLimit[] dsxOrders, OrderType orderType, CurrencyPair currencyPair) {
 
     List<LimitOrder> orders = new ArrayList<>(dsxOrders.length);
 
@@ -142,7 +138,7 @@ public class DsxAdapters {
   }
 
   public static Trades adaptTrades(
-          List<? extends DsxTrade> allDsxTrades, CurrencyPair currencyPair) {
+      List<? extends DsxTrade> allDsxTrades, CurrencyPair currencyPair) {
 
     List<Trade> trades = new ArrayList<>(allDsxTrades.size());
     long lastTradeId = 0;

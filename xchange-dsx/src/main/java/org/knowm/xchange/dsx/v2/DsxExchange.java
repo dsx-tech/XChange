@@ -126,7 +126,6 @@ public class DsxExchange extends BaseExchange implements org.knowm.xchange.Excha
                             (BigDecimal) null,
                             dsxSymbol.getTickSize().scale(),
                             (FeeTier[]) null)));
-    exchangeMetaData =
-        DsxAdapters.adaptToExchangeMetaData(dsxSymbols, currencies, currencyPairs);
+    exchangeMetaData = DsxAdapters.adaptToExchangeMetaData(dsxSymbols, currencies, currencyPairs);
   }
 }

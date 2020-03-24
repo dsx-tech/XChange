@@ -15,12 +15,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dsx.v2.BaseAuthenticatedServiceTest;
-import org.knowm.xchange.dto.Order;
-import org.knowm.xchange.dto.trade.LimitOrder;
-import org.knowm.xchange.dto.trade.MarketOrder;
 import org.knowm.xchange.dsx.v2.DsxAdapters;
 import org.knowm.xchange.dsx.v2.dto.DsxException;
 import org.knowm.xchange.dsx.v2.dto.DsxOrder;
+import org.knowm.xchange.dto.Order;
+import org.knowm.xchange.dto.trade.LimitOrder;
+import org.knowm.xchange.dto.trade.MarketOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,8 +31,7 @@ import org.slf4j.LoggerFactory;
 @Ignore
 public class DsxTradeServiceRawIntegration extends BaseAuthenticatedServiceTest {
 
-  private static final Logger LOGGER =
-      LoggerFactory.getLogger(DsxTradeServiceRawIntegration.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DsxTradeServiceRawIntegration.class);
   @Rule public final ExpectedException exception = ExpectedException.none();
   private DsxTradeServiceRaw service = (DsxTradeServiceRaw) exchange.getTradeService();
   private SecureRandom secureRandom = new SecureRandom();

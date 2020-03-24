@@ -10,7 +10,6 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dsx.v2.dto.*;
 import org.knowm.xchange.exceptions.ExchangeException;
-import org.knowm.xchange.dsx.v2.dto.*;
 import si.mazi.rescu.HttpStatusIOException;
 
 public class DsxAccountServiceRaw extends DsxBaseService {
@@ -29,17 +28,14 @@ public class DsxAccountServiceRaw extends DsxBaseService {
   public String withdrawFundsRaw(
       Currency currency, BigDecimal amount, String address, String paymentId, Boolean includeFee)
       throws HttpStatusIOException {
-    Map response =
-        dsx.payout(amount, currency.getCurrencyCode(), address, paymentId, includeFee);
+    Map response = dsx.payout(amount, currency.getCurrencyCode(), address, paymentId, includeFee);
 
     return response.get("id").toString();
   }
 
   public DsxInternalTransferResponse transferFunds(
-      Currency currency, BigDecimal amount, DsxTransferType dsxTransferType)
-      throws IOException {
-    return dsx.transferToTrading(
-        amount, currency.getCurrencyCode(), dsxTransferType.getType());
+      Currency currency, BigDecimal amount, DsxTransferType dsxTransferType) throws IOException {
+    return dsx.transferToTrading(amount, currency.getCurrencyCode(), dsxTransferType.getType());
   }
 
   public String transferToTrading(Currency currency, BigDecimal amount) throws IOException {
@@ -81,23 +77,17 @@ public class DsxAccountServiceRaw extends DsxBaseService {
   }
 
   public List<DsxTransaction> getTransactions(
-          String currency, DsxSort sort, Date from, Date till, Integer limit, Integer offset)
+      String currency, DsxSort sort, Date from, Date till, Integer limit, Integer offset)
       throws HttpStatusIOException {
 
     String sortValue = sort != null ? sort.toString().toUpperCase() : null;
     String fromValue = from != null ? Instant.ofEpochMilli(from.getTime()).toString() : null;
     String tillValue = till != null ? Instant.ofEpochMilli(till.getTime()).toString() : null;
-    return dsx.transactions(
-        currency, sortValue, "timestamp", fromValue, tillValue, limit, offset);
+    return dsx.transactions(currency, sortValue, "timestamp", fromValue, tillValue, limit, offset);
   }
 
   public List<DsxTransaction> getTransactions(
-      String currency,
-      DsxSort sort,
-      Long fromIndex,
-      Long tillIndex,
-      Integer limit,
-      Integer offset)
+      String currency, DsxSort sort, Long fromIndex, Long tillIndex, Integer limit, Integer offset)
       throws HttpStatusIOException {
 
     String sortValue = sort != null ? sort.toString().toUpperCase() : null;
