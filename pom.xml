@@ -70,14 +70,12 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>nexus-snapshot</id>
+			<url>https://nexus.dsx.cool/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Nexus Release Repository</name>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>nexus-release</id>
+			<url>https://nexus.dsx.cool/repository/maven-releases/</url>
         </repository>
         <downloadUrl>https://oss.sonatype.org/content/groups/public/org/knowm/xchange</downloadUrl>
     </distributionManagement>
@@ -145,8 +143,8 @@
         <module>xchange-cryptopia</module>
         <module>xchange-coinsuper</module>
         <module>xchange-deribit</module>
-        <module>xchange-dragonex</module>
         <module>xchange-dsx</module>
+        <module>xchange-dragonex</module>
         <module>xchange-dvchain</module>
         <module>xchange-exmo</module>
         <module>xchange-exx</module>
