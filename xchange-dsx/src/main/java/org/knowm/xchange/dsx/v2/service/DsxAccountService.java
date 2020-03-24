@@ -79,7 +79,7 @@ public class DsxAccountService extends DsxAccountServiceRaw implements AccountSe
 
     List<DsxTransaction> transactions;
 
-    if (params instanceof TradeHistoryParams) {
+    if (params instanceof DsxFundingHistoryParams) {
       DsxFundingHistoryParams dsxTradeHistoryParams = (DsxFundingHistoryParams) params;
 
       String currency =

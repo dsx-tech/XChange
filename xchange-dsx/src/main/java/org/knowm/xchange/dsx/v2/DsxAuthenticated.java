@@ -25,7 +25,7 @@ import org.knowm.xchange.dsx.v2.service.DsxOrderType;
 import org.knowm.xchange.dsx.v2.service.DsxTimeInForce;
 import si.mazi.rescu.HttpStatusIOException;
 
-/** Version 2 of DSX API. See https://api.dsxglobal.com/api/2/explore/ */
+/** Version 2 of Dsx API. See https://api.dsxglobal.com/api/2/explore/ */
 @Path("/api/2/")
 public interface DsxAuthenticated extends Dsx {
 
@@ -147,7 +147,7 @@ public interface DsxAuthenticated extends Dsx {
    * @param clientOrderId client order id
    * @return list of orders
    * @throws IOException throw in case IO problems
-   * @throws DsxException throw in case internal DSX problems
+   * @throws DsxException throw in case internal Dsx problems
    */
   @GET
   @Path("history/order")

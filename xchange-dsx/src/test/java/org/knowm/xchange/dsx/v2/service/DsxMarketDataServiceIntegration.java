@@ -25,26 +25,6 @@ public class DsxMarketDataServiceIntegration extends BaseServiceTest {
   }
 
   @Test
-  public void testGetTicker_BCC() throws IOException {
-
-    MarketDataService marketDataService = exchange().getMarketDataService();
-
-    Ticker ticker = marketDataService.getTicker(CurrencyPair.BCC_USD);
-    assertNotNull(ticker);
-    assertEquals(CurrencyPair.BCC_USD, ticker.getCurrencyPair());
-  }
-
-  @Test
-  public void testGetTicker_BCH() throws IOException {
-
-    MarketDataService marketDataService = exchange().getMarketDataService();
-
-    Ticker ticker = marketDataService.getTicker(CurrencyPair.BCH_USD);
-    assertNotNull(ticker);
-    assertEquals(CurrencyPair.BCH_USD, ticker.getCurrencyPair());
-  }
-
-  @Test
   public void testGetTrades() throws IOException {
 
     MarketDataService marketDataService = exchange().getMarketDataService();

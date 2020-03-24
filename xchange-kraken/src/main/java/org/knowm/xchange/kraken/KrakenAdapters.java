@@ -201,11 +201,17 @@ public class KrakenAdapters {
 
     List<Balance> balances = new ArrayList<>(krakenWallet.size());
     for (Entry<String, BigDecimal> balancePair : krakenWallet.entrySet()) {
-      Currency currency = adaptCurrency(balancePair.getKey());
+      Currency currency;
+      try {
+        currency = adaptCurrency(balancePair.getKey());
+      } catch (Exception e) {
+        currency = Currency.getInstance(balancePair.getKey());
+      }
+
       Balance balance = new Balance(currency, balancePair.getValue());
       balances.add(balance);
     }
-    return new Wallet(balances);
+    return Wallet.Builder.from(balances).build();
   }
 
   public static Set<CurrencyPair> adaptCurrencyPairs(Collection<String> krakenCurrencyPairs) {
@@ -253,7 +259,7 @@ public class KrakenAdapters {
       trades.add(adaptTrade(krakenTradeEntry.getValue(), krakenTradeEntry.getKey()));
     }
 
-    return new UserTrades(trades, TradeSortType.SortByID);
+    return new UserTrades(trades, TradeSortType.SortByTimestamp);
   }
 
   public static KrakenUserTrade adaptTrade(KrakenTrade krakenTrade, String tradeId) {

@@ -1,5 +1,9 @@
 package org.knowm.xchange.examples.dsx.trade;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.dsx.v2.dto.DsxOwnTrade;
 import org.knowm.xchange.dsx.v2.dto.DsxSort;
@@ -8,11 +12,6 @@ import org.knowm.xchange.dto.trade.UserTrades;
 import org.knowm.xchange.examples.dsx.DsxExampleUtils;
 import org.knowm.xchange.service.trade.TradeService;
 import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamPaging;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 public class DsxTradingDemo {
 

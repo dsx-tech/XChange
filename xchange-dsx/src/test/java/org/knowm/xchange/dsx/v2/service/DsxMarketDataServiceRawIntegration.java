@@ -48,6 +48,6 @@ public class DsxMarketDataServiceRawIntegration extends BaseServiceTest {
     Map<String, DsxTicker> tickers = marketDataServiceRaw.getDsxTickers();
 
     assertThat(tickers).isNotEmpty();
-    assertThat(tickers.get("BTCUSD")).isNotNull();
+    assertThat(tickers.get("BTCUSDT")).isNotNull();
   }
 }

@@ -49,6 +49,7 @@ public final class WithdrawList extends WapiResponse<List<BinanceWithdraw>> {
 
     public final BigDecimal amount;
     public final String address;
+    public final String destinationTag;
     public final long successTime;
     public final String txId;
     public final String id;
@@ -62,6 +63,7 @@ public final class WithdrawList extends WapiResponse<List<BinanceWithdraw>> {
     public BinanceWithdraw(
         @JsonProperty("amount") BigDecimal amount,
         @JsonProperty("address") String address,
+        @JsonProperty("destinationTag") String destinationTag,
         @JsonProperty("successTime") long successTime,
         @JsonProperty("txId") String txId,
         @JsonProperty("id") String id,
@@ -71,6 +73,7 @@ public final class WithdrawList extends WapiResponse<List<BinanceWithdraw>> {
       super();
       this.amount = amount;
       this.address = address;
+      this.destinationTag = destinationTag;
       this.successTime = successTime;
       this.txId = txId;
       this.id = id;

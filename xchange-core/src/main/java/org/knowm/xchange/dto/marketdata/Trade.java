@@ -11,6 +11,8 @@ import org.knowm.xchange.service.marketdata.MarketDataService;
 /** Data object representing a Trade */
 public class Trade implements Serializable {
 
+  private static final long serialVersionUID = -4078893146776655648L;
+
   /** Did this trade result from the execution of a bid or a ask? */
   protected final OrderType type;
 
@@ -28,6 +30,10 @@ public class Trade implements Serializable {
 
   /** The trade id */
   protected final String id;
+
+  private String makerOrderId;
+
+  private String takerOrderId;
 
   /**
    * This constructor is called to create a public Trade object in {@link
@@ -87,6 +93,22 @@ public class Trade implements Serializable {
     return id;
   }
 
+  public String getMakerOrderId() {
+    return makerOrderId;
+  }
+
+  public void setMakerOrderId(String makerOrderId) {
+    this.makerOrderId = makerOrderId;
+  }
+
+  public String getTakerOrderId() {
+    return takerOrderId;
+  }
+
+  public void setTakerOrderId(String takerOrderId) {
+    this.takerOrderId = takerOrderId;
+  }
+
   @Override
   public boolean equals(Object o) {
 
@@ -107,8 +129,8 @@ public class Trade implements Serializable {
 
   @Override
   public String toString() {
-
-    return "Trade [type="
+    return "Trade{"
+        + "type="
         + type
         + ", originalAmount="
         + originalAmount
@@ -118,9 +140,16 @@ public class Trade implements Serializable {
         + price
         + ", timestamp="
         + timestamp
-        + ", id="
+        + ", id='"
         + id
-        + "]";
+        + '\''
+        + ", makerOrderId='"
+        + makerOrderId
+        + '\''
+        + ", takerOrderId='"
+        + takerOrderId
+        + '\''
+        + '}';
   }
 
   public static class Builder {

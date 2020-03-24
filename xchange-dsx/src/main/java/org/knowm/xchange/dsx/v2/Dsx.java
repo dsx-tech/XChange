@@ -14,7 +14,7 @@ import org.knowm.xchange.dsx.v2.dto.DsxSymbol;
 import org.knowm.xchange.dsx.v2.dto.DsxTicker;
 import org.knowm.xchange.dsx.v2.dto.DsxTrade;
 
-/** Version 2 of DSX API. See https://api.dsxglobal.com/api/2/explore/ */
+/** Version 2 of Dsx API. See https://api.dsxglobal.com/api/2/explore/ */
 @Path("/api/2/")
 public interface Dsx {
 

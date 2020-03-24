@@ -86,16 +86,17 @@ public class DsxExchange extends BaseExchange implements org.knowm.xchange.Excha
     ExchangeSpecification exchangeSpecification =
         new ExchangeSpecification(this.getClass().getCanonicalName());
     exchangeSpecification.setSslUri("https://api.dsxglobal.com");
-    exchangeSpecification.setHost("dsx.com");
+    exchangeSpecification.setHost("Dsx");
     exchangeSpecification.setPort(80);
     exchangeSpecification.setExchangeName("Dsx");
-    exchangeSpecification.setExchangeDescription("Dsx is a Bitcoin exchange.");
+    exchangeSpecification.setExchangeDescription("DSX exchange");
 
     return exchangeSpecification;
   }
 
   @Override
   public SynchronizedValueFactory<Long> getNonceFactory() {
+
     return nonceFactory;
   }
 

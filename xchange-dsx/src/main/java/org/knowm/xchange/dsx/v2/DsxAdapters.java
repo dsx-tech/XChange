@@ -2,9 +2,12 @@ package org.knowm.xchange.dsx.v2;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
+import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dsx.v2.dto.*;
+import org.knowm.xchange.dsx.v2.service.DsxMarketDataServiceRaw;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.Order.OrderType;
 import org.knowm.xchange.dto.account.Balance;
@@ -26,43 +29,31 @@ import org.knowm.xchange.dto.trade.UserTrades;
 
 public class DsxAdapters {
 
-  /** known counter currencies at DSX */
-  private static final Set<String> counters =
-      new HashSet<>(Arrays.asList("TUSD", "EURS", "USD", "BTC", "ETH", "DAI", "EOS"));
-  /**
-   * Known TUSD symbols. We use this because it is hard to parse such symbols as STRATUSD: is
-   * counter currency USD or TUSD?
-   */
-  private static final Set<String> TUSD_SYMBOLS =
-      new HashSet<>(
-          Arrays.asList(
-              "USDTUSD",
-              "XMRTUSD",
-              "BTCTUSD",
-              "LTCTUSD",
-              "NEOTUSD",
-              "ETHTUSD",
-              "DAITUSD",
-              "BCHTUSD",
-              "EURSTUSD",
-              "ZRXTUSD"));
+  private static Map<String, CurrencyPair> symbols = new HashMap<>();
 
   public static CurrencyPair adaptSymbol(String symbol) {
-    // In order to differentiate xxxTUSD and xxxUSD
-    String tempSymbol =
-        symbol.endsWith("USD") && !TUSD_SYMBOLS.contains(symbol) ? symbol + "T" : symbol;
-    return counters.stream()
-        .map(counter -> "USD".equals(counter) ? "USDT" : counter)
-        .filter(tempSymbol::endsWith)
-        .map(
-            counter ->
-                counter.substring(0, counter.length() - tempSymbol.length() + symbol.length()))
-        .map(
-            counter ->
-                new CurrencyPair(symbol.substring(0, symbol.length() - counter.length()), counter))
-        .findAny()
-        // We try our best if the counter currency is not in the list
-        .orElse(new CurrencyPair(symbol.substring(0, symbol.length() - 3), symbol.substring(3)));
+    if (symbols.isEmpty()) {
+      try {
+        DsxExchange exchange = ExchangeFactory.INSTANCE.createExchange(DsxExchange.class);
+        symbols =
+            new DsxMarketDataServiceRaw(exchange)
+                .getDsxSymbols().stream()
+                    .collect(
+                        Collectors.toMap(
+                            dsxSymbol -> dsxSymbol.getBaseCurrency() + dsxSymbol.getQuoteCurrency(),
+                            dsxSymbol ->
+                                new CurrencyPair(
+                                    dsxSymbol.getBaseCurrency(), dsxSymbol.getQuoteCurrency())));
+      } catch (Exception ignored) {
+      }
+    }
+
+    return symbols.containsKey(symbol) ? symbols.get(symbol) : guessSymbol(symbol);
+  }
+
+  static CurrencyPair guessSymbol(String symbol) {
+    int splitIndex = symbol.endsWith("USDT") ? symbol.lastIndexOf("USDT") : symbol.length() - 3;
+    return new CurrencyPair(symbol.substring(0, splitIndex), symbol.substring(splitIndex));
   }
 
   public static CurrencyPair adaptSymbol(DsxSymbol dsxSymbol) {
@@ -248,7 +239,7 @@ public class DsxAdapters {
           new Balance(currency, null, balanceRaw.getAvailable(), balanceRaw.getReserved());
       balances.add(balance);
     }
-    return new Wallet(name, name, balances);
+    return Wallet.Builder.from(balances).id(name).name(name).build();
   }
 
   public static String adaptCurrencyPair(CurrencyPair pair) {
@@ -335,7 +326,7 @@ public class DsxAdapters {
       case "bankToExchange":
         return Type.DEPOSIT;
       default:
-        throw new RuntimeException("Unknown DSX transaction type: " + type);
+        throw new RuntimeException("Unknown Dsx transaction type: " + type);
     }
   }
 
@@ -354,15 +345,15 @@ public class DsxAdapters {
       case "success":
         return FundingRecord.Status.COMPLETE;
       default:
-        throw new RuntimeException("Unknown DSX transaction status: " + status);
+        throw new RuntimeException("Unknown Dsx transaction status: " + status);
     }
   }
 
   /**
-   * Decodes DSX Order status.
+   * Decodes Dsx Order status.
    *
    * @return
-   * @see https://api.dsx.com/#order-model Order Model possible statuses: new, suspended,
+   * @see https://api.Dsx/#order-model Order Model possible statuses: new, suspended,
    *     partiallyFilled, filled, canceled, expired
    */
   private static Order.OrderStatus convertOrderStatus(String status) {
@@ -380,7 +371,7 @@ public class DsxAdapters {
       case "expired":
         return Order.OrderStatus.EXPIRED;
       default:
-        throw new RuntimeException("Unknown DSX transaction status: " + status);
+        throw new RuntimeException("Unknown Dsx transaction status: " + status);
     }
   }
 }

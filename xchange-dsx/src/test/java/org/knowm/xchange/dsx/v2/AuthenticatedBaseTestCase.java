@@ -6,7 +6,7 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
 
 /**
- * Base class for making test calls which require authentication to DSX services. Since DSX has no
+ * Base class for making test calls which require authentication to Dsx services. Since Dsx has no
  * test system, these credentials should be private to the person running them. Thus the tests will
  * be ignored for default suite runs. example -Ddsx_api_key=XXXXXXXXXX -Ddsx_secret_key=YYYYYYYYY
  */

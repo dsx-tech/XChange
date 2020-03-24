@@ -88,7 +88,9 @@ public class HuobiAdapters {
     BigDecimal minQty =
         metadata == null
             ? null
-            : metadata.getMinimumAmount().setScale(Integer.parseInt(pair.getAmountPrecision()));
+            : metadata
+                .getMinimumAmount()
+                .setScale(Integer.parseInt(pair.getAmountPrecision()), RoundingMode.DOWN);
     FeeTier[] feeTiers = metadata == null ? null : metadata.getFeeTiers();
     return new CurrencyPairMetaData(
         fee,
@@ -122,7 +124,7 @@ public class HuobiAdapters {
         // It might be a new currency. Ignore the exception and continue with other currency.
       }
     }
-    return new Wallet(balances);
+    return Wallet.Builder.from(balances).build();
   }
 
   public static Map<String, HuobiBalanceSum> adaptBalance(HuobiBalanceRecord[] huobiBalance) {
