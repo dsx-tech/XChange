@@ -47,18 +47,12 @@ public interface Dsx {
   @Path("public/trades/{symbol}")
   List<DsxTrade> getTrades(
       @PathParam("symbol") String symbol,
-      @QueryParam("limit") long limit,
-      @QueryParam("offset") long offset)
-      throws IOException;
-
-  @GET
-  @Path("public/trades/{symbol}")
-  List<DsxTrade> getTrades(
-      @PathParam("symbol") String symbol,
-      @QueryParam("sort") String sortDirection,
-      @QueryParam("by") String sortBy,
-      @QueryParam("from") String from,
-      @QueryParam("limit") long limit)
+      @QueryParam("sort") DsxSort sortDirection,
+      @QueryParam("by") DsxTradesSortBy sortBy,
+      @QueryParam("from") Long from,
+      @QueryParam("till") Long till,
+      @QueryParam("limit") Integer limit,
+      @QueryParam("offset") Integer offset)
       throws IOException;
 
   @GET

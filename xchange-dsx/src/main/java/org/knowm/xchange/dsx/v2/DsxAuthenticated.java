@@ -43,10 +43,10 @@ public interface DsxAuthenticated extends Dsx {
   @Path("account/transactions")
   List<DsxTransaction> transactions(
       @QueryParam("currency") String currency,
-      @QueryParam("sort") String sort,
+      @QueryParam("sort") DsxSort sort,
       @QueryParam("by") String by,
-      @QueryParam("from") String from,
-      @QueryParam("till") String till,
+      @QueryParam("from") Long from,
+      @QueryParam("till") Long till,
       @QueryParam("limit") Integer limit,
       @QueryParam("offset") Integer offset)
       throws DsxException, HttpStatusIOException;
