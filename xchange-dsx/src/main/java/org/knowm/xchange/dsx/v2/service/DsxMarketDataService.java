@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.util.List;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.dsx.dto.DsxTradesSortBy;
 import org.knowm.xchange.dsx.v2.DsxAdapters;
 import org.knowm.xchange.dsx.v2.dto.DsxSort;
-import org.knowm.xchange.dsx.v2.dto.DsxTrade;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trades;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.knowm.xchange.service.marketdata.params.Params;
+import org.knowm.xchange.utils.ArrayUtils;
 
 public class DsxMarketDataService extends DsxMarketDataServiceRaw implements MarketDataService {
 

@@ -7,14 +7,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.dsx.dto.DsxTradesSortBy;
 import org.knowm.xchange.dsx.v2.DsxAdapters;
-import org.knowm.xchange.dsx.v2.dto.DsxCandle;
-import org.knowm.xchange.dsx.v2.dto.DsxCurrency;
-import org.knowm.xchange.dsx.v2.dto.DsxOrderBook;
-import org.knowm.xchange.dsx.v2.dto.DsxSort;
-import org.knowm.xchange.dsx.v2.dto.DsxSymbol;
-import org.knowm.xchange.dsx.v2.dto.DsxTicker;
-import org.knowm.xchange.dsx.v2.dto.DsxTrade;
+import org.knowm.xchange.dsx.v2.dto.*;
 
 public class DsxMarketDataServiceRaw extends DsxBaseService {
 

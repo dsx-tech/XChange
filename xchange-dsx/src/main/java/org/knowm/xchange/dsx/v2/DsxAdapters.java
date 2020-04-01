@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.dsx.dto.DsxTradesSortBy;
 import org.knowm.xchange.dsx.v2.dto.*;
 import org.knowm.xchange.dsx.v2.service.DsxMarketDataServiceRaw;
 import org.knowm.xchange.dto.Order;
