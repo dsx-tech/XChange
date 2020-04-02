@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
+import java.util.Map;
 import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dsx.dto.DsxTradesSortBy;
@@ -36,6 +37,12 @@ public class DsxMarketDataServiceIntegration extends BaseServiceTest {
             CurrencyPair.BTC_USD, null, null, DsxTradesSortBy.id, DsxSort.ASC);
 
     assertNotNull(trades);
+
+    Map<String, Trades> tradesMap =
+        ((DsxMarketDataService) marketDataService)
+            .getAllTrades(DsxSort.DESC, DsxTradesSortBy.timestamp, null, null, 1, 0);
+
+    assertNotNull(tradesMap);
   }
 
   @Test
