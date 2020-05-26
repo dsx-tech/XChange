@@ -19,7 +19,7 @@ import org.knowm.xchange.dsx.v2.service.DsxOrderType;
 import org.knowm.xchange.dsx.v2.service.DsxTimeInForce;
 import si.mazi.rescu.HttpStatusIOException;
 
-/** Version 2 of Dsx API. See https://api.dsxglobal.com/api/2/explore/ */
+/** Version 2 of Dsx API. See https://api.old.dsxglobal.com/api/2/explore/ */
 @Path("/api/2/")
 public interface DsxAuthenticated extends Dsx {
 

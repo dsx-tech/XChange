@@ -312,7 +312,7 @@ public class DsxAdapters {
 
   /**
    * @param type string
-   * @see <a href="https://api.dsxglobal.com/api/2/explore/">Dsx Global API</a> Transaction Model
+   * @see <a href="https://api.old.dsxglobal.com/api/2/explore/">Dsx Global API</a> Transaction Model
    *     possible types: payout, payin, deposit, withdraw, bankToExchange, exchangeToBank
    * @return type enum value
    */
@@ -332,7 +332,7 @@ public class DsxAdapters {
   }
 
   /**
-   * @see <a href="https://api.dsxglobal.com/api/2/explore/">Dsx Global API</a> Transaction Model
+   * @see <a href="https://api.old.dsxglobal.com/api/2/explore/">Dsx Global API</a> Transaction Model
    *     possible statusses: created, pending, failed, success
    * @return status enum value
    */
@@ -354,7 +354,7 @@ public class DsxAdapters {
    * Decodes Dsx Order status.
    *
    * @return
-   * @see <a href="https://api.dsxglobal.com/#order-model">Dsx Global API Order model</a> Order
+   * @see <a href="https://api.old.dsxglobal.com/#order-model">Dsx Global API Order model</a> Order
    *     Model possible statuses: new, suspended, partiallyFilled, filled, canceled, expired
    * @return order status enum
    */
